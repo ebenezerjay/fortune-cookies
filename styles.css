@@ -15,8 +15,20 @@ header {
 }
 
 main {
+	align-items: center;
 	background-color: #F3F0F9;
 	grid-area: main;
+}
+
+h1 {
+	margin: 0px;
+	height: 38px;
+	width: 35%;}
+
+section {
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
 }
 
 .left-aside {
@@ -31,4 +43,24 @@ footer {
 	grid-area: footer;
 }
 
+.flex {
+	display: flex;
+}
 
+form {
+	justify-content: center;
+	height: 10%;
+	width: 100%;
+}
+
+button {
+	width: 15%;
+}
+
+input {
+	width: 40%;
+}
+
+label {
+	align-self: center;
+}
