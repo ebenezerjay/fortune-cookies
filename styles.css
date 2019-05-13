@@ -1,0 +1,34 @@
+body {
+	background-color: #413D49;
+	display: grid;
+	grid-template-columns: 10% 80% 10%;
+	grid-template-areas: 
+	"left-sidebar header right-sidebar"
+	"left-sidebar main right-sidebar"
+	"left-sidebar main right-sidebar"
+	"footer footer footer";
+	height: 100vh;
+}
+
+header {
+	grid-area: header;
+}
+
+main {
+	background-color: #F3F0F9;
+	grid-area: main;
+}
+
+.left-aside {
+	grid-area: left-sidebar;
+}
+
+.right-aside {
+	grid-area: right-sidebar;
+}
+
+footer {
+	grid-area: footer;
+}
+
+
