@@ -8,26 +8,32 @@
 		<title>Fortune cooke saver</title>
 </head>
 <body>
-	<header>
+	<header class="flex">
 
 	</header>
-	<aside class="left-aside">
+	<aside class="left-aside flex">
 
 	</aside>
-	<main>
-		<section>
-			<form action="">
+	<main class="flex">
+		<section class="flex">
+			<h1>Fortune Cookie Saver</h1>
+			<form action="" class="flex">
 				<label for="fortune-input">Type your fortune here</label>
 				<input type="text" name="fortune-input" id="fortune-input">
-				<button>Enter</button>
+				<button id="enter-button" type="button">Enter</button>
 			</form>
+			<article id="article-append">
+				<!-- <h3>What you want to hear</h3> -->
+			</article>
 		</section>
 	</main>
-	<aside class="right-aside">
+	<aside class="right-aside flex">
 
 	</aside>
-	<footer>
+	<footer class="flex">
 
 	</footer>
 </body>
+<script src="main.js"></script>
+<script src="fortune.js"></script>
 </html>
