@@ -1,6 +1,7 @@
 body {
 	background-color: #413D49;
 	display: grid;
+	font-family: 'Dosis', sans-serif;
 	grid-template-columns: 10% 80% 10%;
 	grid-template-areas: 
 	"left-sidebar header right-sidebar"
@@ -21,9 +22,28 @@ main {
 }
 
 h1 {
+	font-family: 'Raleway', sans-serif;
 	margin: 0px;
 	height: 38px;
-	width: 35%;}
+}
+
+h3 {
+	color: #E76200;
+	margin: 5px;
+	/* width: 51%; */
+}
+
+h3:hover {
+	color: red;
+	cursor: pointer;
+}
+
+article {
+	justify-content: center;
+	flex-wrap: wrap;
+	text-align: center;
+	width: 100%;
+}
 
 section {
 	flex-wrap: wrap;
@@ -53,8 +73,18 @@ form {
 	width: 100%;
 }
 
-button {
+.enter-button {
 	width: 15%;
+}
+
+.delete-button {
+	border-radius: 50%;
+	width: fit-content;
+}
+
+.delete-button:hover {
+	background-color: #E76200;
+	cursor: pointer;
 }
 
 input {
@@ -65,3 +95,30 @@ label {
 	align-self: center;
 	padding-right: 10px;
 }
+
+img {
+	width: 50%;
+}
+
+.middle-section {
+	justify-content: center;
+}
+
+.img-label {
+	position: relative;
+	margin-top: 18%;
+	right: 30%;
+}
+
+.article-appended-fortune {
+	background-color: #FCF9F6;
+	border: 1px solid black;
+	justify-content: center;
+	margin: 5px 14%;
+	width: fit-content;
+}
+
+
+
+
+
