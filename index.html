@@ -1,3 +1,8 @@
+<?php
+if($_POST["message"]) {
+    mail("ebenezerjaymusic@gmail.com", "Your fortunes were sent to your email", $_POST["message"], "From: ebenezer@denverartsociety.org");
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,14 +22,14 @@
 	<main class="flex">
 		<section class="flex">
 			<h1>Fortune Cookie Saver</h1>
-			<form action="" class="flex">
+			<form method="POST" action="contact.php" class="flex">
 				<label for="fortune-input">Type your fortune here</label>
 				<input type="text" name="fortune-input" id="fortune-input">
 				<button id="enter-button" type="button">Enter</button>
 			</form>
 			<div class="middle-section flex" id="middle-section">
 				<img src="/fortune1.jpg" alt="fortune cookie paper" id="fortune-image">
-				<label class="img-label" id="img-label">Fortune</label>
+				<label class="img-label" id="img-label"></label>
 			</div>
 			<article id="article-append" class="article-append flex" data-id="${id}">
 			</article>
