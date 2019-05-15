@@ -46,6 +46,7 @@ function createFortuneObject() {
 	newFortune.saveToStorage(fortuneArray);
 	fortuneInput.value = '';
 	disableEnter();
+	disableEmailButtons();
 }
 
 // appends the inputed fortune to the dom
@@ -77,7 +78,7 @@ function deleteFortune(e) {
 	var articleId = e.target.parentElement.dataset.id;
 	fortuneInstance.deleteFromStorage(parseInt(articleId));
 	if (e.target.classList.contains('delete-button')) {
-		e.target.parentElement.remove();
+		e.target.parentElement.parentElement.remove();
 	}
 	e.preventDefault();
 }

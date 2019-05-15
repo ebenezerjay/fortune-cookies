@@ -29,16 +29,16 @@ if($_POST["message"]) {
 			</form>
 			<div class="middle-section flex" id="middle-section">
 				<img src="/fortune1.jpg" alt="fortune cookie paper" id="fortune-image">
-				<label class="img-label" id="img-label"></label>
+				<!-- <label class="img-label" id="img-label"></label> -->
 			</div>
 			<article id="article-append" class="article-append flex" data-id="${id}">
-				<form action="contact.php" method="POST" class="email-form">
+			</article>
+				<form action="contact.php" method="POST" class="email-form flex">
 					<label for="email-input">Enter your email here</label>
 					<input type="email" class="email-input" id="email-input">
 					<button class="save-button" id="save-button" type="submit" disabled="true">Save fortunes</button>
 					<button type="button" class="view-all-button" id="view-all-button" disabled="true">View all</button>
 				</form>
-			</article>
 		</section>
 		</main>
 	<aside class="right-aside flex">

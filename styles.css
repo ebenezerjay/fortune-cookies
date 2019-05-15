@@ -73,6 +73,10 @@ form {
 	width: 100%;
 }
 
+.email-form {
+	
+}
+
 .enter-button {
 	width: 15%;
 }
@@ -97,6 +101,7 @@ label {
 }
 
 img {
+	margin: 10px 0px;
 	width: 50%;
 }
 
