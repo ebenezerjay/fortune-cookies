@@ -30,7 +30,7 @@ function createFortuneObject() {
 
 // appends the inputed fortune to the dom
 function appendFortune(id,fortune) {
-	appendOntoImg();
+	// appendOntoImg();
 	appendSection.innerHTML = `
 		<div class="article-appended-fortune flex" id="article-appended-fortune">
 			<h3 id="appended-fortune" data-id="${id}">${fortune}
@@ -41,9 +41,9 @@ function appendFortune(id,fortune) {
 	fortuneInput.value = '';
 }
 
-function appendOntoImg() {
-	fortuneLabel.innerText = fortuneInput.value;
-}
+// function appendOntoImg() {
+// 	fortuneLabel.innerText = fortuneInput.value;
+// }
 
 // persists object data on page load
 function loadPreviousFortunes() {
