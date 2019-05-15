@@ -3,13 +3,33 @@ var fortuneInput = document.querySelector('#fortune-input');
 var enterButton = document.querySelector('#enter-button');
 var appendSection = document.querySelector('#article-append');
 var fortuneLabel = document.querySelector('#img-label');
+var emailInput = document.querySelector('#email-input');
+var saveButton = document.querySelector('#save-button');
+var viewAllButton = document.querySelector('#view-all-button');
 
 var fortuneArray = JSON.parse(localStorage.getItem('fortune-array')) || [];
 
 // event listeners
+fortuneInput.addEventListener('input', disableEnter);
+emailInput.addEventListener('input', disableEmailButtons);
 enterButton.addEventListener('click', onEnter);
 appendSection.addEventListener('click', deleteFortune);
 window.addEventListener('load',loadPreviousFortunes(fortuneArray));
+
+// disables enter button when input field is empty
+function disableEnter() {
+	if (fortuneInput.value != '') {
+		enterButton.disabled = false;
+	}
+}
+
+// disables save button when input field is empty
+function disableEmailButtons() {
+	if (emailInput.value != '') {
+		saveButton.disabled = false;
+		viewAllButton.disabled = false;
+	}
+}
 
 // fires these functions when enter button is clicked
 function onEnter() {
@@ -20,12 +40,12 @@ function onEnter() {
 function createFortuneObject() {
 	var fortuneId = Math.floor(Date.now());
 	var fortuneString = fortuneInput.value;
-
 	appendFortune(fortuneId,fortuneString);
 	var newFortune = new Fortune(fortuneId,fortuneString);
 	fortuneArray.push(newFortune);
 	newFortune.saveToStorage(fortuneArray);
-	console.log(fortuneArray);
+	fortuneInput.value = '';
+	disableEnter();
 }
 
 // appends the inputed fortune to the dom
@@ -38,7 +58,6 @@ function appendFortune(id,fortune) {
 			</h3>
 		</div>
 	` + appendSection.innerHTML;
-	fortuneInput.value = '';
 }
 
 // function appendOntoImg() {
