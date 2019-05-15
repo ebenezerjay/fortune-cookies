@@ -12,7 +12,6 @@ var fortuneArray = JSON.parse(localStorage.getItem('fortune-array')) || [];
 // event listeners
 fortuneInput.addEventListener('input', disableEnter);
 emailInput.addEventListener('input', disableEmailButtons);
-
 enterButton.addEventListener('click', onEnter);
 appendSection.addEventListener('click', deleteFortune);
 window.addEventListener('load',loadPreviousFortunes(fortuneArray));
