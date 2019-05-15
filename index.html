@@ -1,6 +1,6 @@
 <?php
 if($_POST["message"]) {
-    mail("ebenezerjaymusic@gmail.com", "Your fortunes were sent to your email", $_POST["message"], "From: ebenezer@denverartsociety.org");
+    mail("ebenezerjaymusic@gmail.com", "Your fortunes were sent to your email", $_POST["message"], "Subject: Your fortunes");
 }
 ?>
 <!DOCTYPE html>
@@ -10,7 +10,7 @@ if($_POST["message"]) {
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css">
 		<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1.0">
 		<link href="https://fonts.googleapis.com/css?family=Dosis|Raleway" rel="stylesheet">
-		<title>Fortune cooke saver</title>
+		<title>Fortune cookie saver</title>
 </head>
 <body>
 	<header class="flex">
@@ -22,7 +22,7 @@ if($_POST["message"]) {
 	<main class="flex">
 		<section class="flex">
 			<h1>Fortune Cookie Saver</h1>
-			<form method="POST" action="contact.php" class="flex">
+			<form class="flex">
 				<label for="fortune-input">Type your fortune here</label>
 				<input type="text" name="fortune-input" id="fortune-input">
 				<button id="enter-button" type="button" disabled="true">Enter</button>
@@ -33,8 +33,8 @@ if($_POST["message"]) {
 			</div>
 			<article id="article-append" class="article-append flex" data-id="${id}">
 			</article>
-				<form action="contact.php" method="POST" class="email-form flex">
-					<label for="email-input">Enter your email here</label>
+				<form method="POST" action="contact.php" class="email-form flex">
+					<label for="email-input" name="Name">Enter your email here</label>
 					<input type="email" class="email-input" id="email-input">
 					<button class="save-button" id="save-button" type="submit" disabled="true">Save fortunes</button>
 					<button type="button" class="view-all-button" id="view-all-button" disabled="true">View all</button>
