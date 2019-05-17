@@ -1,17 +1,18 @@
 // global variables
 var fortuneInput = document.querySelector('#fortune-input');
 var enterButton = document.querySelector('#enter-button');
-var appendSection = document.querySelector('#article-append');
+var appendSection = document.querySelector('#ol-list-append');
+// var allListSection = document.querySelector('#all-section-list');
 var fortuneLabel = document.querySelector('#img-label');
-var emailInput = document.querySelector('#email-input');
-var saveButton = document.querySelector('#save-button');
-var viewAllButton = document.querySelector('#view-all-button');
+// var emailInput = document.querySelector('#email-input');
+// var saveButton = document.querySelector('#save-button');
+// var viewAllButton = document.querySelector('#view-all-button');
 
 var fortuneArray = JSON.parse(localStorage.getItem('fortune-array')) || [];
 
 // event listeners
 fortuneInput.addEventListener('input', disableEnter);
-emailInput.addEventListener('input', disableEmailButtons);
+// emailInput.addEventListener('input', disableEmailButtons);
 enterButton.addEventListener('click', onEnter);
 appendSection.addEventListener('click', deleteFortune);
 window.addEventListener('load',loadPreviousFortunes(fortuneArray));
@@ -24,12 +25,12 @@ function disableEnter() {
 }
 
 // disables save button when input field is empty
-function disableEmailButtons() {
-	if (emailInput.value != '') {
-		saveButton.disabled = false;
-		viewAllButton.disabled = false;
-	}
-}
+// function disableEmailButtons() {
+// 	if (emailInput.value != '') {
+// 		saveButton.disabled = false;
+// 		viewAllButton.disabled = false;
+// 	}
+// }
 
 // fires these functions when enter button is clicked
 function onEnter() {
@@ -46,24 +47,26 @@ function createFortuneObject() {
 	newFortune.saveToStorage(fortuneArray);
 	fortuneInput.value = '';
 	disableEnter();
-	disableEmailButtons();
+	// disableEmailButtons();
 }
 
 // appends the inputed fortune to the dom
 function appendFortune(id,fortune) {
-	// appendOntoImg();
+	appendOntoImg();
 	appendSection.innerHTML = `
 		<div class="article-appended-fortune flex" id="article-appended-fortune">
-			<h3 id="appended-fortune" data-id="${id}">${fortune}
-			<button type="button" class="delete-button" id="delete-button">X</button>
-			</h3>
+			<li>
+				<h3 id="appended-fortune" data-id="${id}" contenteditable="true">${fortune}
+				</h3>
+				<button type="button" class="delete-button" id="delete-button">X</button>
+			</li>
 		</div>
 	` + appendSection.innerHTML;
 }
 
-// function appendOntoImg() {
-// 	fortuneLabel.innerText = fortuneInput.value;
-// }
+function appendOntoImg() {
+	fortuneLabel.innerText = fortuneInput.value;
+}
 
 // persists object data on page load
 function loadPreviousFortunes() {
@@ -78,7 +81,7 @@ function deleteFortune(e) {
 	var articleId = e.target.parentElement.dataset.id;
 	fortuneInstance.deleteFromStorage(parseInt(articleId));
 	if (e.target.classList.contains('delete-button')) {
-		e.target.parentElement.parentElement.remove();
+		e.target.parentElement.parentElement.parentElement.remove();
 	}
 	e.preventDefault();
 }
