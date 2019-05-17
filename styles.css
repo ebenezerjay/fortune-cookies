@@ -38,7 +38,7 @@ h3:hover {
 	cursor: pointer;
 }
 
-article {
+ol {
 	justify-content: center;
 	flex-wrap: wrap;
 	text-align: center;
@@ -110,9 +110,9 @@ img {
 }
 
 .img-label {
-	position: relative;
-	margin-top: 18%;
-	right: 30%;
+	color: #1a47c3;
+	position: fixed;
+	margin-top: 10px;
 }
 
 .article-appended-fortune {
@@ -122,7 +122,6 @@ img {
 	margin: 5px 14%;
 	width: fit-content;
 }
-
 
 
 

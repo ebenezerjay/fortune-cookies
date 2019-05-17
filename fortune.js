@@ -9,7 +9,7 @@ class Fortune {
 		}
 
 		deleteFromStorage(id) {
-			// var fortuneArray = this.pullFromStorage();
+			var fortuneArray = this.pullFromStorage();
 			fortuneArray.splice(this.getIndex(id), 1);
 			this.saveToStorage(fortuneArray);
 		}

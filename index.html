@@ -1,8 +1,4 @@
-<?php
-if($_POST["message"]) {
-    mail("ebenezerjaymusic@gmail.com", "Your fortunes were sent to your email", $_POST["message"], "Subject: Your fortunes");
-}
-?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,17 +24,13 @@ if($_POST["message"]) {
 				<button id="enter-button" type="button" disabled="true">Enter</button>
 			</form>
 			<div class="middle-section flex" id="middle-section">
-				<img src="fortune1.jpg" alt="fortune cookie paper" id="fortune-image">
-				<!-- <label class="img-label" id="img-label"></label> -->
+				<img src="emptyFortune-image.jpg" alt="fortune cookie paper" id="fortune-image">
+				<label class="img-label" id="img-label"></label>
 			</div>
-			<article id="article-append" class="article-append flex" data-id="${id}">
-			</article>
-				<form method="POST" action="contact.php" class="email-form flex">
-					<label for="email-input" name="Name">Enter your email here</label>
-					<input type="email" class="email-input" id="email-input">
-					<button class="save-button" id="save-button" type="submit" disabled="true">Save fortunes</button>
-					<button type="button" class="view-all-button" id="view-all-button" disabled="true">View all</button>
-				</form>
+			<ol id="ol-list-append" class="ol-list-append flex" data-id="${id}">
+			
+			</ol>
+			<!-- <a href="view-all.html" class="view-all-link" id="view-all-link">Click here to view all your fortunes</a> -->
 		</section>
 		</main>
 	<aside class="right-aside flex">
