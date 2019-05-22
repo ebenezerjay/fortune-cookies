@@ -1,6 +1,8 @@
 // global variables
 var fortuneInput = document.querySelector('#fortune-input');
+var searchInput = document.querySelector('#search-input');
 var enterButton = document.querySelector('#enter-button');
+var searchIcon = document.querySelector('#search-icon');
 var appendSection = document.querySelector('#ol-list-append');
 // var allListSection = document.querySelector('#all-section-list');
 var fortuneLabel = document.querySelector('#img-label');
@@ -12,6 +14,7 @@ var fortuneArray = JSON.parse(localStorage.getItem('fortune-array')) || [];
 
 // event listeners
 fortuneInput.addEventListener('input', disableEnter);
+searchIcon.addEventListener('click', searchFortunes);
 // emailInput.addEventListener('input', disableEmailButtons);
 enterButton.addEventListener('click', onEnter);
 appendSection.addEventListener('click', deleteFortune);
@@ -54,11 +57,11 @@ function createFortuneObject() {
 function appendFortune(id,fortune) {
 	appendOntoImg();
 	appendSection.innerHTML = `
-		<div class="article-appended-fortune flex" id="article-appended-fortune">
-			<li>
+		<div class="article-appended-fortune flex" id="article-appended-fortune" data-id="${id}">
+			<li class="appended-li" id="appended-li-item" data-id="${id}">
 				<h3 id="appended-fortune" data-id="${id}" contenteditable="true">${fortune}
 				</h3>
-				<button type="button" class="delete-button" id="delete-button">X</button>
+				<button type="button" class="delete-button" id="delete-button" data-id="${id}">X</button>
 			</li>
 		</div>
 	` + appendSection.innerHTML;
@@ -77,12 +80,15 @@ function loadPreviousFortunes() {
 
 // deletes fortune from dom and local storage
 function deleteFortune(e) {
-	var fortuneInstance = new Fortune();
-	var articleId = e.target.parentElement.dataset.id;
-	fortuneInstance.deleteFromStorage(parseInt(articleId));
 	if (e.target.classList.contains('delete-button')) {
-		e.target.parentElement.parentElement.parentElement.remove();
+		var fortuneInstance = new Fortune();
+		var articleId = e.target.parentElement.parentElement.dataset.id;
+		fortuneInstance.deleteFromStorage(parseInt(articleId));
+		e.target.parentElement.parentElement.remove();
 	}
 	e.preventDefault();
 }
 
+function searchFortunes() {
+	
+}

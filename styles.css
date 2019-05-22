@@ -12,7 +12,9 @@ body {
 }
 
 header {
+	align-items: center;
 	grid-area: header;
+	justify-content: center;
 }
 
 main {
@@ -123,6 +125,17 @@ img {
 	width: fit-content;
 }
 
+.search-input {
+	height: 50%;
+	text-align: center;
+}
 
+.fa-search {
+	position: relative;
+	right: 3%;
+}
 
+.fa-search:hover {
+	cursor: pointer;
+}
 

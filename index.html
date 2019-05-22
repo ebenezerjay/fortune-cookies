@@ -6,11 +6,12 @@
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css">
 		<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1.0">
 		<link href="https://fonts.googleapis.com/css?family=Dosis|Raleway" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 		<title>Fortune cookie saver</title>
 </head>
 <body>
 	<header class="flex">
-
+		<input type="text" class="search-input" id="search-input" placeholder="search fortunes"><i class="fas fa-search" id="search-icon"></i>
 	</header>
 	<aside class="left-aside flex">
 
@@ -24,7 +25,7 @@
 				<button id="enter-button" type="button" disabled="true">Enter</button>
 			</form>
 			<div class="middle-section flex" id="middle-section">
-				<img src="emptyFortune-image.jpg" alt="fortune cookie paper" id="fortune-image">
+				<img src="images/emptyFortune-image.jpg" alt="fortune cookie paper" id="fortune-image">
 				<label class="img-label" id="img-label"></label>
 			</div>
 			<ol id="ol-list-append" class="ol-list-append flex" data-id="${id}">
