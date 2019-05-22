@@ -2,7 +2,6 @@
 var fortuneInput = document.querySelector('#fortune-input');
 var searchInput = document.querySelector('#search-input');
 var enterButton = document.querySelector('#enter-button');
-var searchIcon = document.querySelector('#search-icon');
 var appendSection = document.querySelector('#ol-list-append');
 // var allListSection = document.querySelector('#all-section-list');
 var fortuneLabel = document.querySelector('#img-label');
@@ -14,11 +13,20 @@ var fortuneArray = JSON.parse(localStorage.getItem('fortune-array')) || [];
 
 // event listeners
 fortuneInput.addEventListener('input', disableEnter);
-searchIcon.addEventListener('click', searchFortunes);
 // emailInput.addEventListener('input', disableEmailButtons);
 enterButton.addEventListener('click', onEnter);
 appendSection.addEventListener('click', deleteFortune);
 window.addEventListener('load',loadPreviousFortunes(fortuneArray));
+searchInput.addEventListener('keyup', function(e) {
+	if (searchInput.value) {
+		appendSection.innerHTML = '';
+    searchFortunes(searchInput.value);
+  } else if (!searchInput.value) {
+    appendSection.innerHTML = '';
+    loadPreviousFortunes();
+	}
+	e.preventDefault();
+});
 
 // disables enter button when input field is empty
 function disableEnter() {
@@ -89,6 +97,12 @@ function deleteFortune(e) {
 	e.preventDefault();
 }
 
-function searchFortunes() {
-	
+// allows user to search fortunes in local storage and display on page
+function searchFortunes(searchText) {
+	var fortuneInstance = new Fortune();
+	var newFortuneArray = fortuneInstance.pullFromStorage();
+	var fortuneFilter = newFortuneArray.filter(obj => obj.fortune.toUpperCase().indexOf(searchText.toUpperCase()) === 0);
+	for (var i = fortuneFilter.length -1; i >= 0; i-- ) {
+		appendFortune(fortuneFilter[i].id, fortuneFilter[i].fortune);
+		}
 }
