@@ -1,7 +1,9 @@
 class Fortune {
-    constructor(id,fortune) {
+    constructor(id,fortune,favorite) {
         this.id = id;
-        this.fortune = fortune;
+				this.fortune = fortune;
+				this.favorite = favorite || false;
+				console.log(this.favorite);
     }
 
     saveToStorage(array) {
@@ -12,6 +14,12 @@ class Fortune {
 			var fortuneArray = this.pullFromStorage();
 			fortuneArray.splice(this.getIndex(id), 1);
 			this.saveToStorage(fortuneArray);
+		}
+
+		changeCheckmarkIcon(favorite) {
+			this.favorite = !this.favorite;
+			this.saveToStorage(favorite);
+			console.log(this.favorite);
 		}
 
 		getIndex(id) {

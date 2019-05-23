@@ -3,19 +3,22 @@ var fortuneInput = document.querySelector('#fortune-input');
 var searchInput = document.querySelector('#search-input');
 var enterButton = document.querySelector('#enter-button');
 var appendSection = document.querySelector('#ol-list-append');
-// var allListSection = document.querySelector('#all-section-list');
+var checkmark = document.querySelector('#checkmark-image');
 var fortuneLabel = document.querySelector('#img-label');
+// var allListSection = document.querySelector('#all-section-list');
 // var emailInput = document.querySelector('#email-input');
 // var saveButton = document.querySelector('#save-button');
 // var viewAllButton = document.querySelector('#view-all-button');
 
 var fortuneArray = JSON.parse(localStorage.getItem('fortune-array')) || [];
+console.log(fortuneArray);
 
 // event listeners
 fortuneInput.addEventListener('input', disableEnter);
 // emailInput.addEventListener('input', disableEmailButtons);
 enterButton.addEventListener('click', onEnter);
 appendSection.addEventListener('click', deleteFortune);
+appendSection.addEventListener('click', changeCheckMark);
 window.addEventListener('load',loadPreviousFortunes(fortuneArray));
 searchInput.addEventListener('keyup', function(e) {
 	if (searchInput.value) {
@@ -67,9 +70,11 @@ function appendFortune(id,fortune) {
 	appendSection.innerHTML = `
 		<div class="article-appended-fortune flex" id="article-appended-fortune" data-id="${id}">
 			<li class="appended-li" id="appended-li-item" data-id="${id}">
-				<h3 id="appended-fortune" data-id="${id}" contenteditable="true">${fortune}
-				</h3>
-				<button type="button" class="delete-button" id="delete-button" data-id="${id}">X</button>
+				<h3 id="appended-fortune" data-id="${id}" contenteditable="true">${fortune}</h3>
+				<div class="list-buttons flex">
+					<button type="button" class="delete-button" id="delete-button" data-id="${id}">X</button>
+					<img src="images/unFilledCheck.png" id="checkmark-image" class="checkmark-image">
+				</div>
 			</li>
 		</div>
 	` + appendSection.innerHTML;
@@ -90,9 +95,9 @@ function loadPreviousFortunes() {
 function deleteFortune(e) {
 	if (e.target.classList.contains('delete-button')) {
 		var fortuneInstance = new Fortune();
-		var articleId = e.target.parentElement.parentElement.dataset.id;
+		var articleId = e.target.parentElement.parentElement.parentElement.dataset.id;
 		fortuneInstance.deleteFromStorage(parseInt(articleId));
-		e.target.parentElement.parentElement.remove();
+		e.target.parentElement.parentElement.parentElement.remove();
 	}
 	e.preventDefault();
 }
@@ -106,3 +111,21 @@ function searchFortunes(searchText) {
 		appendFortune(fortuneFilter[i].id, fortuneFilter[i].fortune);
 		}
 }
+
+// changes the status of favorite in Fortune Class
+function changeCheckMark(e) {
+	var checkId = e.target.parentElement.parentElement.parentElement.dataset.id;
+	console.log(checkId);
+	// console.log(fortuneArray.favorite);
+	if (e.target.classList.contains('checkmark-image') && fortuneArray.favorite === false) {
+		e.target.setAttribute('src', 'images/filledCheck.png');
+		var fortuneInstance = new Fortune();
+		// var articleId = e.target.parentElement.parentElement.dataset.id;
+		fortuneInstance.changeCheckmarkIcon(checkId);
+	} else {
+		e.target.setAttribute('src', 'images/unFilledCheck.png');
+		var fortuneInstance = new Fortune();
+		fortuneInstance.changeCheckmarkIcon(checkId);
+	}
+}
+
