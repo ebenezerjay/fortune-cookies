@@ -13,6 +13,7 @@ fortuneInput.addEventListener('input', disableEnter);
 enterButton.addEventListener('click', onEnter);
 appendSection.addEventListener('click', deleteFortune);
 appendSection.addEventListener('click', changeCheckMark);
+appendSection.addEventListener('input', editFortune);
 window.addEventListener('load',onPageLoad);
 searchInput.addEventListener('keyup', function(e) {
 	if (searchInput.value) {
@@ -34,9 +35,9 @@ function onPageLoad() {
 function loadPreviousFortunes(oldFortunes) {
 	fortuneArray = [];
   for (var i = 0; i < oldFortunes.length; i++) {
-		var newFortune = new Fortune(oldFortunes[i].id, oldFortunes[i].fortune, oldFortunes[i].favorite);
+		var newFortune = new Fortune(oldFortunes[i].id, oldFortunes[i].fortuneText, oldFortunes[i].favorite);
 		fortuneArray.push(newFortune);
-		appendFortune(fortuneArray[i].id, fortuneArray[i].fortune, fortuneArray[i].favorite);
+		appendFortune(fortuneArray[i].id, fortuneArray[i].fortuneText, fortuneArray[i].favorite);
 		loadFav(fortuneArray[i].favorite);
 	}
 }
@@ -49,12 +50,12 @@ function disableEnter() {
 }
 
 // fires these functions when enter button is clicked
-function onEnter() {
-	createFortuneObject();
+function onEnter(e) {
+	createFortuneObject(e);
 }
 
 // creates the Fortune object that is saved into local storage
-function createFortuneObject() {
+function createFortuneObject(e) {
 	var fortuneId = Math.floor(Date.now());
 	var fortuneString = fortuneInput.value;
 	var newFortune = new Fortune(fortuneId,fortuneString);
@@ -79,6 +80,16 @@ function appendFortune(id,fortune,favorite) {
 			</li>
 		</div>
 	` + appendSection.innerHTML;
+}
+
+// changes the fortune on the dom and in local storage
+function editFortune(e) {
+	var parsedId = parseInt(e.target.parentElement.parentElement.getAttribute('data-id'));
+	var editedText = e.target.innerText;
+  var targetFortune = fortuneArray.find(function(fortune) {
+		return fortune.id === parsedId;
+  });
+	targetFortune.updateFortune(targetFortune, editedText);
 }
 
 function loadFav(fav) {
