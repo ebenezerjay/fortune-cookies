@@ -1,7 +1,7 @@
 class Fortune {
-	constructor(id,fortune,favorite) {
+	constructor(id,fortuneText,favorite) {
 		this.id = id;
-		this.fortune = fortune;
+		this.fortuneText = fortuneText;
 		this.favorite = favorite || false;
 	}
 	
@@ -20,6 +20,12 @@ class Fortune {
 	changeCheckmarkIcon() {
 		this.favorite = !this.favorite;
 		this.saveToStorage(fortuneArray);
+	}
+
+	// changes the fortune when user edits the text
+	updateFortune(fortune,editedFortune) {
+			fortune.fortuneText = editedFortune;
+			this.saveToStorage(fortuneArray);
 	}
 
 }
