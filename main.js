@@ -3,33 +3,43 @@ var fortuneInput = document.querySelector('#fortune-input');
 var searchInput = document.querySelector('#search-input');
 var enterButton = document.querySelector('#enter-button');
 var appendSection = document.querySelector('#ol-list-append');
-var checkmark = document.querySelector('#checkmark-image');
 var fortuneLabel = document.querySelector('#img-label');
-// var allListSection = document.querySelector('#all-section-list');
-// var emailInput = document.querySelector('#email-input');
-// var saveButton = document.querySelector('#save-button');
-// var viewAllButton = document.querySelector('#view-all-button');
+
 
 var fortuneArray = JSON.parse(localStorage.getItem('fortune-array')) || [];
-console.log(fortuneArray);
 
 // event listeners
 fortuneInput.addEventListener('input', disableEnter);
-// emailInput.addEventListener('input', disableEmailButtons);
 enterButton.addEventListener('click', onEnter);
 appendSection.addEventListener('click', deleteFortune);
 appendSection.addEventListener('click', changeCheckMark);
-window.addEventListener('load',loadPreviousFortunes(fortuneArray));
+window.addEventListener('load',onPageLoad);
 searchInput.addEventListener('keyup', function(e) {
 	if (searchInput.value) {
 		appendSection.innerHTML = '';
     searchFortunes(searchInput.value);
   } else if (!searchInput.value) {
     appendSection.innerHTML = '';
-    loadPreviousFortunes();
+    loadPreviousFortunes(fortuneArray);
 	}
 	e.preventDefault();
 });
+
+// runs functions on page load 
+function onPageLoad() {
+	loadPreviousFortunes(fortuneArray);
+}
+
+// persists object data on page load
+function loadPreviousFortunes(oldFortunes) {
+	fortuneArray = [];
+  for (var i = 0; i < oldFortunes.length; i++) {
+		var newFortune = new Fortune(oldFortunes[i].id, oldFortunes[i].fortune, oldFortunes[i].favorite);
+		fortuneArray.push(newFortune);
+		appendFortune(fortuneArray[i].id, fortuneArray[i].fortune, fortuneArray[i].favorite);
+		loadFav(fortuneArray[i].favorite);
+	}
+}
 
 // disables enter button when input field is empty
 function disableEnter() {
@@ -37,14 +47,6 @@ function disableEnter() {
 		enterButton.disabled = false;
 	}
 }
-
-// disables save button when input field is empty
-// function disableEmailButtons() {
-// 	if (emailInput.value != '') {
-// 		saveButton.disabled = false;
-// 		viewAllButton.disabled = false;
-// 	}
-// }
 
 // fires these functions when enter button is clicked
 function onEnter() {
@@ -55,17 +57,16 @@ function onEnter() {
 function createFortuneObject() {
 	var fortuneId = Math.floor(Date.now());
 	var fortuneString = fortuneInput.value;
-	appendFortune(fortuneId,fortuneString);
 	var newFortune = new Fortune(fortuneId,fortuneString);
+	appendFortune(fortuneId,fortuneString);
 	fortuneArray.push(newFortune);
 	newFortune.saveToStorage(fortuneArray);
 	fortuneInput.value = '';
 	disableEnter();
-	// disableEmailButtons();
 }
 
 // appends the inputed fortune to the dom
-function appendFortune(id,fortune) {
+function appendFortune(id,fortune,favorite) {
 	appendOntoImg();
 	appendSection.innerHTML = `
 		<div class="article-appended-fortune flex" id="article-appended-fortune" data-id="${id}">
@@ -73,33 +74,42 @@ function appendFortune(id,fortune) {
 				<h3 id="appended-fortune" data-id="${id}" contenteditable="true">${fortune}</h3>
 				<div class="list-buttons flex">
 					<button type="button" class="delete-button" id="delete-button" data-id="${id}">X</button>
-					<img src="images/unFilledCheck.png" id="checkmark-image" class="checkmark-image">
+					<img src="images/unFilledCheck.png" id="checkmark-image" class="checkmark-image" data-fav="${favorite}">
 				</div>
 			</li>
 		</div>
 	` + appendSection.innerHTML;
 }
 
-function appendOntoImg() {
-	fortuneLabel.innerText = fortuneInput.value;
+function loadFav(fav) {
+	var checkmark = document.querySelector('#checkmark-image');
+	for (var i = 0; i < fortuneArray.length; i++) {
+		var fav = fortuneArray[i].favorite;
+	}
+	if (fav === true) {
+		checkmark.setAttribute('src', 'images/filledCheck.png');
+	} else {
+		checkmark.setAttribute('src', 'images/unFilledCheck.png');
+	}
 }
 
-// persists object data on page load
-function loadPreviousFortunes() {
-    for (var i = 0; i < fortuneArray.length; i++) {
-      appendFortune(fortuneArray[i].id, fortuneArray[i].fortune);
-    }
+// inserts text over the fortune image
+function appendOntoImg() {
+	fortuneLabel.innerText = fortuneInput.value;
 }
 
 // deletes fortune from dom and local storage
 function deleteFortune(e) {
 	if (e.target.classList.contains('delete-button')) {
-		var fortuneInstance = new Fortune();
-		var articleId = e.target.parentElement.parentElement.parentElement.dataset.id;
-		fortuneInstance.deleteFromStorage(parseInt(articleId));
+		var articleId = parseInt(e.target.parentElement.parentElement.parentElement.dataset.id);
+		var targetFortune = fortuneArray.find(function(fortune) {
+			return fortune.id === articleId;
+		});
+		var fortuneIndex = fortuneArray.indexOf(targetFortune);
 		e.target.parentElement.parentElement.parentElement.remove();
+		targetFortune.deleteFromStorage(fortuneIndex);
+		console.log(fortuneArray);
 	}
-	e.preventDefault();
 }
 
 // allows user to search fortunes in local storage and display on page
@@ -112,20 +122,23 @@ function searchFortunes(searchText) {
 		}
 }
 
-// changes the status of favorite in Fortune Class
+// if checkmark icon is clicked it runs the changeAttribute function...
 function changeCheckMark(e) {
-	var checkId = e.target.parentElement.parentElement.parentElement.dataset.id;
-	console.log(checkId);
-	// console.log(fortuneArray.favorite);
-	if (e.target.classList.contains('checkmark-image') && fortuneArray.favorite === false) {
-		e.target.setAttribute('src', 'images/filledCheck.png');
-		var fortuneInstance = new Fortune();
-		// var articleId = e.target.parentElement.parentElement.dataset.id;
-		fortuneInstance.changeCheckmarkIcon(checkId);
-	} else {
-		e.target.setAttribute('src', 'images/unFilledCheck.png');
-		var fortuneInstance = new Fortune();
-		fortuneInstance.changeCheckmarkIcon(checkId);
-	}
+	if (e.target.classList.contains('checkmark-image')) {
+		changeAttribute(e);
+	} 
 }
 
+// changes the favorite attributes in local storage and the dom
+function changeAttribute(e) {
+	var checkmarkId = parseInt(e.target.parentElement.parentElement.dataset.id);
+	var targetFortune = fortuneArray.find(function(fortune) {
+		return fortune.id === checkmarkId;
+	});
+	targetFortune.changeCheckmarkIcon();
+	if (targetFortune.favorite === false) {
+		e.target.setAttribute('src', 'images/unFilledCheck.png');
+	} else if (targetFortune.favorite === true) {
+		e.target.setAttribute('src', 'images/filledCheck.png');
+	}
+}
