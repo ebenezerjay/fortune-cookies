@@ -28,4 +28,13 @@ class Fortune {
 			this.saveToStorage(fortuneArray);
 	}
 
+	getIndex(id) {
+		return this.pullFromStorage().findIndex(fortune => fortune.id === id);
+	}
+	
+	pullFromStorage() {
+		return JSON.parse(localStorage.getItem('fortune-array'));
+	}
+
+
 }

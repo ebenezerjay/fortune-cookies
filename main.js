@@ -16,7 +16,7 @@ appendSection.addEventListener('click', changeCheckMark);
 appendSection.addEventListener('input', editFortune);
 window.addEventListener('load',onPageLoad);
 searchInput.addEventListener('keyup', function(e) {
-	if (searchInput.value) {
+	if (13 == e.keyCode || searchInput.value) {
 		appendSection.innerHTML = '';
     searchFortunes(searchInput.value);
   } else if (!searchInput.value) {
@@ -29,6 +29,7 @@ searchInput.addEventListener('keyup', function(e) {
 // runs functions on page load 
 function onPageLoad() {
 	loadPreviousFortunes(fortuneArray);
+	hideFortunes();
 }
 
 // persists object data on page load
@@ -42,6 +43,22 @@ function loadPreviousFortunes(oldFortunes) {
 	}
 }
 
+// displays only 4 fortunes on the page at a time
+function hideFortunes() {
+	var hiddenFortunes = [];
+  fortuneArray.forEach(function(el) {
+		if (fortuneArray.indexOf(el) > 4) {
+			hiddenFortunes.push(el);
+      fortuneArray.splice(0, 1);
+			console.log(fortuneArray);
+			console.log(hiddenFortunes);
+		} 
+		// else {
+		// 	appendFortune(el.id,el.fortuneText,el.favorite);
+		// }
+	});
+}
+
 // disables enter button when input field is empty
 function disableEnter() {
 	if (fortuneInput.value != '') {
@@ -52,6 +69,7 @@ function disableEnter() {
 // fires these functions when enter button is clicked
 function onEnter(e) {
 	createFortuneObject(e);
+	hideFortunes();
 }
 
 // creates the Fortune object that is saved into local storage
@@ -119,7 +137,6 @@ function deleteFortune(e) {
 		var fortuneIndex = fortuneArray.indexOf(targetFortune);
 		e.target.parentElement.parentElement.parentElement.remove();
 		targetFortune.deleteFromStorage(fortuneIndex);
-		console.log(fortuneArray);
 	}
 }
 
@@ -127,9 +144,9 @@ function deleteFortune(e) {
 function searchFortunes(searchText) {
 	var fortuneInstance = new Fortune();
 	var newFortuneArray = fortuneInstance.pullFromStorage();
-	var fortuneFilter = newFortuneArray.filter(obj => obj.fortune.toUpperCase().indexOf(searchText.toUpperCase()) === 0);
+	var fortuneFilter = newFortuneArray.filter(obj => obj.fortuneText.toUpperCase().indexOf(searchText.toUpperCase()) === 0);
 	for (var i = fortuneFilter.length -1; i >= 0; i-- ) {
-		appendFortune(fortuneFilter[i].id, fortuneFilter[i].fortune);
+		appendFortune(fortuneFilter[i].id, fortuneFilter[i].fortuneText);
 		}
 }
 
