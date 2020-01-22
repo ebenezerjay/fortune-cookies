@@ -24,7 +24,7 @@ main {
 }
 
 h1 {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Quicksand', sans-serif;
 	margin: 0px;
 	height: 38px;
 }
@@ -102,10 +102,10 @@ label {
 	padding-right: 10px;
 }
 
-img {
+/* img {
 	margin: 10px 0px;
 	width: 50%;
-}
+} */
 
 .checkmark-image {
 	margin: 0px;
@@ -123,13 +123,22 @@ img {
 }
 
 .middle-section {
-	justify-content: center;
+	flex-wrap: wrap;
+	/* justify-content: center; */
+	width: 100%;
 }
 
-.img-label {
+.fortune-image {
+	height: 73%;
+	margin: 4% 0px 4% 2%;
+	width: 95%;
+}
+
+.img-text {
 	color: #1a47c3;
-	position: fixed;
-	margin-top: 10px;
+	position: relative;
+	bottom: 44%;
+	margin: auto;
 }
 
 .article-appended-fortune {

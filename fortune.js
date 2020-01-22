@@ -11,8 +11,9 @@ class Fortune {
 	}
 
 	// deletes the fortune from local storage
-	deleteFromStorage(index) {
-		fortuneArray.splice(index, 1);
+	deleteFromStorage(id) {
+		var fortuneArray = this.pullFromStorage();
+		fortuneArray.splice(this.getIndex(id), 1);
 		this.saveToStorage(fortuneArray);
 	}
 
@@ -35,6 +36,5 @@ class Fortune {
 	pullFromStorage() {
 		return JSON.parse(localStorage.getItem('fortune-array'));
 	}
-
 
 }
