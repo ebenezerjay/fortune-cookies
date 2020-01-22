@@ -136,6 +136,7 @@ label {
 
 .img-text {
 	color: #1a47c3;
+	font-size: 20px;
 	position: relative;
 	bottom: 44%;
 	margin: auto;
@@ -161,4 +162,28 @@ label {
 
 .fa-search:hover {
 	cursor: pointer;
+}
+
+
+@media only screen and (max-width: 550px) {
+	.fortune-heading {
+		font-size: 18px;
+		width: 75%;
+	}
+
+	.search-input {
+		width: 100%;
+	}
+
+	.fa-search {
+		position: relative;
+    right: 10%;
+	}
+
+	.img-text {
+		height: 100%;
+    margin: 0% 0px 4% 11%;
+    width: 100%;
+		font-size: 11px;
+	}
 }
