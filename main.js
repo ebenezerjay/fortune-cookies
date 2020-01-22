@@ -3,7 +3,7 @@ var fortuneInput = document.querySelector('#fortune-input');
 var searchInput = document.querySelector('#search-input');
 var enterButton = document.querySelector('#enter-button');
 var appendSection = document.querySelector('#ol-list-append');
-var fortuneLabel = document.querySelector('#img-label');
+var fortuneLabel = document.querySelector('#img-text-id');
 
 
 var fortuneArray = JSON.parse(localStorage.getItem('fortune-array')) || [];
@@ -29,34 +29,18 @@ searchInput.addEventListener('keyup', function(e) {
 // runs functions on page load 
 function onPageLoad() {
 	loadPreviousFortunes(fortuneArray);
-	hideFortunes();
+	// hideFortunes();
 }
 
-// persists object data on page load
+// persists object data on page load and limits 4 fortunes to the page
 function loadPreviousFortunes(oldFortunes) {
 	fortuneArray = [];
-  for (var i = 0; i < oldFortunes.length; i++) {
-		var newFortune = new Fortune(oldFortunes[i].id, oldFortunes[i].fortuneText, oldFortunes[i].favorite);
-		fortuneArray.push(newFortune);
-		appendFortune(fortuneArray[i].id, fortuneArray[i].fortuneText, fortuneArray[i].favorite);
-		loadFav(fortuneArray[i].favorite);
-	}
-}
-
-// displays only 4 fortunes on the page at a time
-function hideFortunes() {
-	var hiddenFortunes = [];
-  fortuneArray.forEach(function(el) {
-		if (fortuneArray.indexOf(el) > 4) {
-			hiddenFortunes.push(el);
-      fortuneArray.splice(0, 1);
-			console.log(fortuneArray);
-			console.log(hiddenFortunes);
-		} 
-		// else {
-		// 	appendFortune(el.id,el.fortuneText,el.favorite);
-		// }
-	});
+		for (var i = 0; i < oldFortunes.length; i++) {
+			var newFortune = new Fortune(oldFortunes[i].id, oldFortunes[i].fortuneText, oldFortunes[i].favorite);
+			fortuneArray.push(newFortune);
+			appendFortune(fortuneArray[i].id, fortuneArray[i].fortuneText, fortuneArray[i].favorite);
+			loadFav(fortuneArray[i].favorite);
+		}
 }
 
 // disables enter button when input field is empty
@@ -69,7 +53,6 @@ function disableEnter() {
 // fires these functions when enter button is clicked
 function onEnter(e) {
 	createFortuneObject(e);
-	hideFortunes();
 }
 
 // creates the Fortune object that is saved into local storage
@@ -82,6 +65,7 @@ function createFortuneObject(e) {
 	newFortune.saveToStorage(fortuneArray);
 	fortuneInput.value = '';
 	disableEnter();
+	// hideFortunes();
 }
 
 // appends the inputed fortune to the dom
@@ -130,13 +114,15 @@ function appendOntoImg() {
 // deletes fortune from dom and local storage
 function deleteFortune(e) {
 	if (e.target.classList.contains('delete-button')) {
+		var newFortuneInstance = new Fortune();
 		var articleId = parseInt(e.target.parentElement.parentElement.parentElement.dataset.id);
-		var targetFortune = fortuneArray.find(function(fortune) {
-			return fortune.id === articleId;
-		});
-		var fortuneIndex = fortuneArray.indexOf(targetFortune);
+		// var targetFortune = fortuneArray.find(function(fortune) {
+		// 	return fortune.id === articleId;
+		// });
+		// var fortuneIndex = fortuneArray.indexOf(targetFortune);
+		newFortuneInstance.deleteFromStorage(articleId);
 		e.target.parentElement.parentElement.parentElement.remove();
-		targetFortune.deleteFromStorage(fortuneIndex);
+		// targetFortune.deleteFromStorage(fortuneIndex);
 	}
 }
 

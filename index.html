@@ -18,16 +18,16 @@
 	</aside>
 	<main class="flex">
 		<section class="flex">
-			<h1>Fortune Cookie Saver</h1>
+			<h1>Fortune Cookie Database</h1>
 			<form class="flex">
 				<label for="fortune-input">Type your fortune here</label>
 				<input type="text" name="fortune-input" id="fortune-input">
 				<button id="enter-button" type="button" disabled="true">Enter</button>
 			</form>
-			<div class="middle-section flex" id="middle-section">
-				<img src="images/emptyFortune-image.jpg" alt="fortune cookie paper" id="fortune-image">
-				<label class="img-label" id="img-label"></label>
-			</div>
+			<article class="middle-section flex" data-id="${id}">
+				<img src="images/emptyFortune-image.jpg" alt="fortune cookie paper" class="fortune-image flex" id="fortune-image-id">
+				<h2 class="img-text flex" id="img-text-id"></h2>
+			</article>
 			<ol id="ol-list-append" class="ol-list-append flex" data-id="${id}">
 			
 			</ol>
