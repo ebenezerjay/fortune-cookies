@@ -19,10 +19,10 @@
 	<main class="flex">
 		<section class="flex">
 			<h1 class="fortune-heading">Fortune Cookie Database</h1>
-			<form class="flex">
+			<form name="fortune-form" action="fortunes.php" method="POST" class="flex">
 				<label for="fortune-input">Type your fortune here</label>
 				<input type="text" name="fortune-input" id="fortune-input">
-				<button id="enter-button" type="button" disabled="true">Enter</button>
+				<button id="enter-button" type="button" name="enter" disabled="true">Enter</button>
 			</form>
 			<article class="middle-section flex" data-id="${id}">
 				<img src="images/emptyFortune-image.jpg" alt="fortune cookie paper" class="fortune-image flex" id="fortune-image-id">
