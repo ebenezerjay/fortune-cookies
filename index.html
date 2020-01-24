@@ -20,9 +20,15 @@
 		<section class="flex">
 			<h1 class="fortune-heading">Fortune Cookie Database</h1>
 			<form name="fortune-form" action="fortunes.php" method="POST" class="flex">
-				<label for="fortune-input">Type your fortune here</label>
-				<input type="text" name="fortune-input" id="fortune-input">
-				<button id="enter-button" type="button" name="enter" disabled="true">Enter</button>
+				<div class="top-form flex">
+					<label for="fortune-input">Type your fortune here</label>
+					<input type="text" name="fortune-input" id="fortune-input" class="fortune-input">
+					<button class="enter-button" id="enter-button" type="submit" name="enter" disabled="true">Enter</button>
+				</div>
+				<div class="bottom-form flex">
+					<label for="fortune-user-name">Type your user name here</label>
+					<input type="text" name="user-name" id="user-name-id" class="user-name">
+				</div>
 			</form>
 			<article class="middle-section flex" data-id="${id}">
 				<img src="images/emptyFortune-image.jpg" alt="fortune cookie paper" class="fortune-image flex" id="fortune-image-id">

@@ -70,6 +70,7 @@ footer {
 }
 
 form {
+	flex-wrap: wrap;
 	justify-content: center;
 	height: 10%;
 	width: 100%;
@@ -80,6 +81,7 @@ form {
 } */
 
 .enter-button {
+	padding: 5px;
 	width: 15%;
 }
 
@@ -93,13 +95,33 @@ form {
 	cursor: pointer;
 }
 
-input {
+/* input {
 	width: 40%;
-}
+} */
 
 label {
 	align-self: center;
 	padding-right: 10px;
+}
+
+.top-form {
+	justify-content: center;
+	width: 100%;
+}
+
+.fortune-input {
+	padding: 5px;
+	width: 50%;
+}
+
+.user-name {
+	padding: 5px;
+	width: 15%;
+}
+
+.bottom-form {
+	justify-content: center;
+	width: 100%;
 }
 
 /* img {
