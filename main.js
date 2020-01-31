@@ -1,7 +1,7 @@
 // global variables
 var fortuneInput = document.querySelector('#fortune-input');
 var searchInput = document.querySelector('#search-input-id');
-var enterButton = document.querySelector('#enter-button');
+var enterButton = document.querySelectorAll('#enter-button');
 var appendSection = document.querySelector('#ol-list-append');
 var fortuneLabel = document.querySelector('#img-text-id');
 

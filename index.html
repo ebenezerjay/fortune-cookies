@@ -3,11 +3,11 @@
 <html>
 <head>
 	<link rel="stylesheet" href="styles.css">
-	<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css">
+	<!-- <link rel="stylesheet" type="text/css" href="normalize.css/normalize.css"> -->
 	<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1.0">
 	<link href="https://fonts.googleapis.com/css?family=Dosis|Raleway" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-	<title>Fortune cookie saver</title>
+	<title>Fortune Cookie Database</title>
 </head>
 <body>
 	<header class="flex">
@@ -19,16 +19,11 @@
 	<main class="flex">
 		<section class="flex">
 			<h1 class="fortune-heading">Fortune Cookie Database</h1>
-			<form name="fortune-form" action="fortunes.php" method="POST" class="flex">
-				<div class="top-form flex">
-					<label for="fortune-input">Type your fortune here</label>
-					<input type="text" name="fortune-input" id="fortune-input" class="fortune-input">
-					<button class="enter-button" id="enter-button" type="submit" name="enter" disabled="true">Enter</button>
-				</div>
-				<div class="bottom-form flex">
-					<label for="fortune-user-name">Type your user name here</label>
-					<input type="text" name="user-name" id="user-name-id" class="user-name">
-				</div>
+			<form name="fortune-form" action="fortunes.php" method="POST" class="flex" autocomplete="on" target="_top">
+				<input type="text" name="user" id="user-name-id" class="user-name" placeholder="type your name here" required>
+				<input type="text" name="fortuneText" id="fortune-input" class="fortune-input" placeholder="Type your fortune here">
+				<!-- <button class="enter-button" id="enter-button" type="submit" name="enter" disabled="true">Enter</button> -->
+				<button type="submit">Submit fortune</button>
 			</form>
 			<article class="middle-section flex" data-id="${id}">
 				<img src="images/emptyFortune-image.jpg" alt="fortune cookie paper" class="fortune-image flex" id="fortune-image-id">
