@@ -95,9 +95,9 @@ form {
 	cursor: pointer;
 }
 
-/* input {
+input {
 	width: 40%;
-} */
+}
 
 label {
 	align-self: center;
@@ -110,12 +110,12 @@ label {
 }
 
 .fortune-input {
-	padding: 5px;
+	/* padding: 5px; */
 	width: 50%;
 }
 
 .user-name {
-	padding: 5px;
+	/* padding: 5px; */
 	width: 15%;
 }
 
