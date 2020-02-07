@@ -22,8 +22,8 @@
 			<form name="fortune-form" action="fortunes.php" method="POST" class="flex" autocomplete="on" target="_top">
 				<input type="text" name="user" id="user-name-id" class="user-name" placeholder="type your name here" required>
 				<input type="text" name="fortuneText" id="fortune-input" class="fortune-input" placeholder="Type your fortune here">
-				<!-- <button class="enter-button" id="enter-button" type="submit" name="enter" disabled="true">Enter</button> -->
-				<button type="submit">Submit fortune</button>
+				<button class="enter-button" id="enter-button" type="button" name="enter">Enter</button>
+				<!-- <button type="submit">Submit fortune</button> -->
 			</form>
 			<article class="middle-section flex" data-id="${id}">
 				<img src="images/emptyFortune-image.jpg" alt="fortune cookie paper" class="fortune-image flex" id="fortune-image-id">
@@ -42,6 +42,7 @@
 
 	</footer>
 </body>
+<script src="jquery.js"></script>
 <script src="main.js"></script>
 <script src="fortune.js"></script>
 </html>
