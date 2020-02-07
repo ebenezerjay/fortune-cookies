@@ -1,16 +1,16 @@
 // global variables
-var fortuneInput = document.querySelector('#fortune-input');
-var searchInput = document.querySelector('#search-input-id');
-var enterButton = document.querySelectorAll('#enter-button');
-var appendSection = document.querySelector('#ol-list-append');
-var fortuneLabel = document.querySelector('#img-text-id');
+const fortuneInput = document.querySelector('#fortune-input');
+const searchInput = document.querySelector('#search-input-id');
+const enterButton = $('#enter-button');
+const appendSection = document.querySelector('#ol-list-append');
+const fortuneLabel = document.querySelector('#img-text-id');
 
 
 var fortuneArray = JSON.parse(localStorage.getItem('fortune-array')) || [];
 
 // event listeners
 fortuneInput.addEventListener('input', disableEnter);
-enterButton.addEventListener('click', onEnter);
+enterButton.on('click', onEnter);
 appendSection.addEventListener('click', deleteFortune);
 appendSection.addEventListener('click', changeCheckMark);
 appendSection.addEventListener('input', editFortune);
@@ -52,11 +52,39 @@ function disableEnter() {
 
 // fires these functions when enter button is clicked
 function onEnter(e) {
-	createFortuneObject(e);
+	sendAJAX();
+	createFortuneObject();
+	e.preventDefault();
 }
 
+// send AJAX call to server
+function sendAJAX() {
+	$('form').submit(function(event) {
+
+		// get the form data
+		var formData = {
+			'user' : $('input[name=user]').val(),
+			'fortuneText' : $('input[name=fortuneText]').val(),
+		};
+		$.ajax({
+			type        : 'POST',
+			url         : 'fortunes.php', 
+			data        : formData, 
+			dataType    : 'script', // what type of data do we expect back from the server
+			encode      : true
+		})
+		.done(function(data) {
+
+			// log data to the console so we can see
+			console.log(data); 
+			
+			// here we will handle errors and validation messages
+	});
+	}
+)};
+
 // creates the Fortune object that is saved into local storage
-function createFortuneObject(e) {
+function createFortuneObject() {
 	var fortuneId = Math.floor(Date.now());
 	var fortuneString = fortuneInput.value;
 	var newFortune = new Fortune(fortuneId,fortuneString);

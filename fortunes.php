@@ -6,10 +6,9 @@
 // }
 
 if (!empty($_POST)) {
-	// print_r($_POST); exit;
 	// Create connection to mysql
 	$fortuneDatabase = new mysqli("localhost", "fortuned_eJI", "Helpontheway2112!", "fortuned_Fortunes");
-	
+
 	// Check connection
 	if ($fortuneDatabase->connect_error) {
 		die('Connect error: ' . $fortuneDatabase->connect_errno . ': ' . $fortuneDatabase->connect_error);

@@ -96,6 +96,7 @@ form {
 }
 
 input {
+	height: 25px;
 	width: 40%;
 }
 
@@ -175,6 +176,7 @@ label {
 .search-input {
 	height: 50%;
 	text-align: center;
+	width: 50%;
 }
 
 .fa-search {
