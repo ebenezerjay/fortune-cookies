@@ -10,7 +10,9 @@ var fortuneArray = JSON.parse(localStorage.getItem('fortune-array')) || [];
 
 // event listeners
 fortuneInput.addEventListener('input', disableEnter);
-enterButton.on('click', onEnter);
+$(enterButton).on('click', function() {
+	sendAJAX();
+});
 appendSection.addEventListener('click', deleteFortune);
 appendSection.addEventListener('click', changeCheckMark);
 appendSection.addEventListener('input', editFortune);
@@ -51,16 +53,15 @@ function disableEnter() {
 }
 
 // fires these functions when enter button is clicked
-function onEnter(e) {
-	sendAJAX();
-	createFortuneObject();
-	e.preventDefault();
-}
+// function onEnter(e) {
+// 	sendAJAX();
+// 	e.preventDefault();
+// }
 
 // send AJAX call to server
 function sendAJAX() {
 	$('form').submit(function(event) {
-
+		console.log('check please');
 		// get the form data
 		var formData = {
 			'user' : $('input[name=user]').val(),
@@ -74,12 +75,12 @@ function sendAJAX() {
 			encode      : true
 		})
 		.done(function(data) {
-
 			// log data to the console so we can see
 			console.log(data); 
-			
+			createFortuneObject();
 			// here we will handle errors and validation messages
 	});
+	event.preventDefault();
 	}
 )};
 

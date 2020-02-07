@@ -18,17 +18,9 @@ if (!empty($_POST)) {
 	$fortuneData = "INSERT INTO allFortunes (user,fortuneText) VALUES ( '{$fortuneDatabase->real_escape_string($_POST['user'])}', '{$fortuneDatabase->real_escape_string($_POST['fortuneText'])}')";
 
 	$insertFortune = $fortuneDatabase->query($fortuneData);
-	
-	function test_input($data) {
-		$data = trim($data);
-		$data = stripslashes($data);
-		$data = htmlspecialchars($data);
-		return $data;
-	}
 
 	// Print response from mysql
 	if ($insertFortune) {
-		echo htmlspecialchars($_SERVER["PHP_SELF"]);
 		echo "Boom! Row ID: {$fortuneDatabase->insert_id}";
 	} else {
 		die("Error: {$fortuneDatabase->errno} : {$fortuneDatabase->error}");
