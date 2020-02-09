@@ -1,7 +1,8 @@
 // global variables
 const fortuneInput = document.querySelector('#fortune-input');
+const userName = document.querySelector('#user-name-id');
 const searchInput = document.querySelector('#search-input-id');
-const enterButton = $('#enter-button');
+const enterButton = document.querySelector('#enter-button');
 const appendSection = document.querySelector('#ol-list-append');
 const fortuneLabel = document.querySelector('#img-text-id');
 
@@ -9,9 +10,12 @@ const fortuneLabel = document.querySelector('#img-text-id');
 var fortuneArray = JSON.parse(localStorage.getItem('fortune-array')) || [];
 
 // event listeners
-fortuneInput.addEventListener('input', disableEnter);
-$(enterButton).on('click', function() {
-	sendAJAX();
+// userName.addEventListener('input',disableEnter);
+// fortuneInput.addEventListener('input', disableEnter);
+enterButton.addEventListener('click', function() {
+	console.log('???');
+	// sendAJAX();
+	createFortuneObject();
 });
 appendSection.addEventListener('click', deleteFortune);
 appendSection.addEventListener('click', changeCheckMark);
@@ -46,11 +50,11 @@ function loadPreviousFortunes(oldFortunes) {
 }
 
 // disables enter button when input field is empty
-function disableEnter() {
-	if (fortuneInput.value != '') {
-		enterButton.disabled = false;
-	}
-}
+// function disableEnter() {
+// 	if (fortuneInput.value != '' || userName.value != '') {
+// 		enterButton.disabled = false;
+// 	}
+// }
 
 // fires these functions when enter button is clicked
 // function onEnter(e) {
@@ -59,30 +63,29 @@ function disableEnter() {
 // }
 
 // send AJAX call to server
-function sendAJAX() {
-	$('form').submit(function(event) {
-		console.log('check please');
-		// get the form data
-		var formData = {
-			'user' : $('input[name=user]').val(),
-			'fortuneText' : $('input[name=fortuneText]').val(),
-		};
-		$.ajax({
-			type        : 'POST',
-			url         : 'fortunes.php', 
-			data        : formData, 
-			dataType    : 'script', // what type of data do we expect back from the server
-			encode      : true
-		})
-		.done(function(data) {
-			// log data to the console so we can see
-			console.log(data); 
-			createFortuneObject();
-			// here we will handle errors and validation messages
-	});
-	event.preventDefault();
-	}
-)};
+// function sendAJAX() {
+// 	$('form').submit(function(event) {
+// 		console.log('check please');
+// 		// get the form data
+// 		var formData = {
+// 			'user' : $('input[name=user]').val(),
+// 			'fortuneText' : $('input[name=fortuneText]').val(),
+// 		};
+// 		$.ajax({
+// 			type        : 'POST',
+// 			url         : 'fortunes.php', 
+// 			data        : formData, 
+// 			dataType    : 'JSON', // what type of data do we expect back from the server
+// 			encode      : true,
+// 		})
+// 		.done(function(data) {
+// 			// log data to the console so we can see
+// 			console.log(data); 
+// 			// here we will handle errors and validation messages
+// 	});
+// 	event.preventDefault();
+// 	}
+// )};
 
 // creates the Fortune object that is saved into local storage
 function createFortuneObject() {
@@ -92,7 +95,7 @@ function createFortuneObject() {
 	appendFortune(fortuneId,fortuneString);
 	fortuneArray.push(newFortune);
 	newFortune.saveToStorage(fortuneArray);
-	fortuneInput.value = '';
+	// fortuneInput.value = '';
 	disableEnter();
 	// hideFortunes();
 }

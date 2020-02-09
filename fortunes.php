@@ -4,10 +4,11 @@
 //     // echo htmlspecialchars($_POST['fortune-input']);
 //     echo htmlspecialchars("Something is supposed to happen here");
 // }
+$dataArray = array();
 
 if (!empty($_POST)) {
 	// Create connection to mysql
-	$fortuneDatabase = new mysqli("localhost", "fortuned_eJI", "Helpontheway2112!", "fortuned_Fortunes");
+	$fortuneDatabase = new mysqli("localhost:3306", "fortuned_eJI", "Helpontheway2112!", "fortuned_Fortunes");
 
 	// Check connection
 	if ($fortuneDatabase->connect_error) {
@@ -21,7 +22,7 @@ if (!empty($_POST)) {
 
 	// Print response from mysql
 	if ($insertFortune) {
-		echo "Boom! Row ID: {$fortuneDatabase->insert_id}";
+		echo "Boom Shakalaka Row ID: {$fortuneDatabase->insert_id}";
 	} else {
 		die("Error: {$fortuneDatabase->errno} : {$fortuneDatabase->error}");
 	}
