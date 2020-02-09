@@ -3,10 +3,13 @@
 <html>
 <head>
 	<link rel="stylesheet" href="styles.css">
+	<
 	<!-- <link rel="stylesheet" type="text/css" href="normalize.css/normalize.css"> -->
 	<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1.0">
 	<link href="https://fonts.googleapis.com/css?family=Dosis|Raleway" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/ angular.min.js"></script> -->
 	<title>Fortune Cookie Database</title>
 </head>
 <body>
@@ -22,7 +25,7 @@
 			<form name="fortune-form" action="fortunes.php" method="POST" class="flex" autocomplete="on" target="_top">
 				<input type="text" name="user" id="user-name-id" class="user-name" placeholder="type your name here" required>
 				<input type="text" name="fortuneText" id="fortune-input" class="fortune-input" placeholder="Type your fortune here">
-				<button class="enter-button" id="enter-button" type="button" name="enter">Enter</button>
+				<button class="enter-button" id="enter-button" type="submit" name="enter" >Enter</button>
 			</form>
 			<article class="middle-section flex" data-id="${id}">
 				<img src="images/emptyFortune-image.jpg" alt="fortune cookie paper" class="fortune-image flex" id="fortune-image-id">
