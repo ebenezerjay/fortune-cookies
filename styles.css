@@ -2,7 +2,7 @@ body {
 	background-color: #413D49;
 	display: grid;
 	font-family: 'Dosis', sans-serif;
-	grid-template-columns: 10% 80% 10%;
+	grid-template-columns: 15% 70% 15%;
 	grid-template-areas: 
 	"left-sidebar header right-sidebar"
 	"left-sidebar main right-sidebar"
@@ -63,6 +63,7 @@ section {
 
 footer {
 	grid-area: footer;
+	justify-content: center;
 }
 
 .flex {
@@ -188,6 +189,9 @@ label {
 	cursor: pointer;
 }
 
+.footer-text {
+	color: ghostwhite;
+}
 
 @media only screen and (max-width: 550px) {
 	.fortune-heading {
