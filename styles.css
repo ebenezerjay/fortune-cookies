@@ -164,6 +164,7 @@ label {
 	position: relative;
 	bottom: 44%;
 	margin: auto;
+	/* width: 50%; */
 }
 
 .article-appended-fortune {

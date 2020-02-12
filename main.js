@@ -10,11 +10,7 @@ const fortuneLabel = document.querySelector('#img-text-id');
 var fortuneArray = JSON.parse(localStorage.getItem('fortune-array')) || [];
 
 // event listeners
-// userName.addEventListener('input',disableEnter);
-// fortuneInput.addEventListener('input', disableEnter);
 enterButton.addEventListener('click', function() {
-	console.log('???');
-	// sendAJAX();
 	createFortuneObject();
 });
 appendSection.addEventListener('click', deleteFortune);
@@ -49,44 +45,6 @@ function loadPreviousFortunes(oldFortunes) {
 		}
 }
 
-// disables enter button when input field is empty
-// function disableEnter() {
-// 	if (fortuneInput.value != '' || userName.value != '') {
-// 		enterButton.disabled = false;
-// 	}
-// }
-
-// fires these functions when enter button is clicked
-// function onEnter(e) {
-// 	sendAJAX();
-// 	e.preventDefault();
-// }
-
-// send AJAX call to server
-// function sendAJAX() {
-// 	$('form').submit(function(event) {
-// 		console.log('check please');
-// 		// get the form data
-// 		var formData = {
-// 			'user' : $('input[name=user]').val(),
-// 			'fortuneText' : $('input[name=fortuneText]').val(),
-// 		};
-// 		$.ajax({
-// 			type        : 'POST',
-// 			url         : 'fortunes.php', 
-// 			data        : formData, 
-// 			dataType    : 'JSON', // what type of data do we expect back from the server
-// 			encode      : true,
-// 		})
-// 		.done(function(data) {
-// 			// log data to the console so we can see
-// 			console.log(data); 
-// 			// here we will handle errors and validation messages
-// 	});
-// 	event.preventDefault();
-// 	}
-// )};
-
 // creates the Fortune object that is saved into local storage
 function createFortuneObject() {
 	var fortuneId = Math.floor(Date.now());
@@ -95,9 +53,6 @@ function createFortuneObject() {
 	appendFortune(fortuneId,fortuneString);
 	fortuneArray.push(newFortune);
 	newFortune.saveToStorage(fortuneArray);
-	// fortuneInput.value = '';
-	disableEnter();
-	// hideFortunes();
 }
 
 // appends the inputed fortune to the dom
@@ -148,10 +103,6 @@ function deleteFortune(e) {
 	if (e.target.classList.contains('delete-button')) {
 		var newFortuneInstance = new Fortune();
 		var articleId = parseInt(e.target.parentElement.parentElement.parentElement.dataset.id);
-		// var targetFortune = fortuneArray.find(function(fortune) {
-		// 	return fortune.id === articleId;
-		// });
-		// var fortuneIndex = fortuneArray.indexOf(targetFortune);
 		newFortuneInstance.deleteFromStorage(articleId);
 		e.target.parentElement.parentElement.parentElement.remove();
 		// targetFortune.deleteFromStorage(fortuneIndex);
