@@ -1,13 +1,10 @@
 <?php
 
-// if (isset($_POST['enter'])) {
-//     // echo htmlspecialchars($_POST['fortune-input']);
-//     echo htmlspecialchars("Something is supposed to happen here");
-// }
 $dataArray = array();
+$message = "";
 
-if (!empty($_POST)) {
-	// Create connection to mysql
+//check if form was submitted
+if(isset($_POST['enter-button'])){ 
 	$fortuneDatabase = new mysqli("localhost:3306", "fortuned_eJI", "Helpontheway2112!", "fortuned_Fortunes");
 
 	// Check connection
@@ -15,20 +12,21 @@ if (!empty($_POST)) {
 		die('Connect error: ' . $fortuneDatabase->connect_errno . ': ' . $fortuneDatabase->connect_error);
 	} 
 
+	//get input text
+  $input = $_POST['fortune-input']; 
+	$message = "Boom Shakalaka! You entered: ".$input;
+	
 	// Insert data 
 	$fortuneData = "INSERT INTO allFortunes (user,fortuneText) VALUES ( '{$fortuneDatabase->real_escape_string($_POST['user'])}', '{$fortuneDatabase->real_escape_string($_POST['fortuneText'])}')";
-
 	$insertFortune = $fortuneDatabase->query($fortuneData);
-
+	
 	// Print response from mysql
 	if ($insertFortune) {
-		echo "Boom Shakalaka Row ID: {$fortuneDatabase->insert_id}";
+		echo $message;
 	} else {
 		die("Error: {$fortuneDatabase->errno} : {$fortuneDatabase->error}");
 	}
 	$fortuneDatabase->close();
 }
-
-
 
 ?>
