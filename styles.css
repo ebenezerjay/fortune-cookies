@@ -2,19 +2,13 @@ body {
 	background-color: #413D49;
 	display: grid;
 	font-family: 'Dosis', sans-serif;
-	grid-template-columns: 15% 70% 15%;
+	grid-template-columns: 5% 90% 5%;
 	grid-template-areas: 
 	"left-sidebar header right-sidebar"
 	"left-sidebar main right-sidebar"
 	"left-sidebar main right-sidebar"
 	"footer footer footer";
 	height: 100vh;
-}
-
-header {
-	align-items: center;
-	grid-area: header;
-	justify-content: center;
 }
 
 main {
@@ -51,6 +45,64 @@ section {
 	flex-wrap: wrap;
 	justify-content: center;
 	width: 100%;
+}
+
+ /* tabel styling */
+table {
+	border: 2px solid black;
+	width: 100%;
+	color: #858585;
+	font-family: monospace;
+	font-size: 22px;
+	justify-content: center;
+	}
+
+th {
+	background-color: #858585;
+	border: 1px solid black;
+	color: white;
+	}
+
+.thID {
+}
+
+.idWidth {
+	width: 6%;	
+}
+
+.thUser {
+}
+
+.userWidth {
+	width: 12%;
+}
+.thFortune {
+}
+
+.fortuneWidth {
+	width: 65%;
+}
+
+.thDate {
+}
+
+.dateWidth {
+width: 17%;
+}
+
+.thFav {
+}
+
+.favWidth {
+
+}
+
+td {
+	border: 2px solid black;
+	color: #413D49;
+}
+tr:nth-child(even) {
+	background-color: #f2f2f2
 }
 
 .left-aside {
@@ -167,6 +219,11 @@ label {
 	/* width: 50%; */
 }
 
+.ol-list-append {
+	justify-content: center;
+	padding-left: 0px;
+}
+
 .article-appended-fortune {
 	background-color: #FCF9F6;
 	border: 1px solid black;
@@ -188,10 +245,6 @@ label {
 
 .fa-search:hover {
 	cursor: pointer;
-}
-
-.footer-text {
-	color: ghostwhite;
 }
 
 @media only screen and (max-width: 550px) {
