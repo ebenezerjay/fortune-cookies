@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html ng-app="">
+<html>
 <head>
 	<link rel="stylesheet" href="styles.css">
 	<!-- <link rel="stylesheet" type="text/css" href="normalize/normalize.css"> -->
@@ -13,26 +13,40 @@
 	<title>Fortune Cookie Database</title>
 </head>
 <body>
-	<header class="flex">
-		<input type="text" class="search-input flex" id="search-input-id" placeholder="search fortunes"><i class="fas fa-search" id="search-icon"></i>
-	</header>
 	<aside class="left-aside flex">
-
+		
 	</aside>
 	<main class="flex">
-		<section class="flex">
+		<section ng-app="fortuneApp" class="flex">
 			<h1 class="fortune-heading">Fortune Cookie Database</h1>
-			<form name="fortune-form" action="" method="POST" class="flex" autocomplete="on" target="_top">
+			<form name="fortune-form" action="fortunes.php" method="POST" class="flex" autocomplete="on" target="_top">
 				<input type="text" name="user" id="user-name-id" class="user-name" placeholder="type your name here" required>
-				<input ng-model="imgTextModel" type="text" name="fortuneText" id="fortune-input" class="fortune-input" placeholder="Type your fortune here">
+				<input ng-model="imgTextModel" type="text" name="fortuneText" id="fortune-input" class="fortune-input" placeholder="Type your fortune here" required>
 				<button class="enter-button" id="enter-button" type="submit" name="enter" >Enter</button>
 			</form>
 			<article class="middle-section flex" data-id="${id}">
-				<img src="images/emptyFortune-image.jpg" alt="fortune cookie paper" class="fortune-image flex" id="fortune-image-id">
+				<img src="images/emptyFortune-image.jpg" alt="image of fortune from inside a fortune cookie" class="fortune-image flex" id="fortune-image-id">
 				<h2 ng-bind="imgTextModel" class="img-text flex" id="img-text-id"></h2>
 			</article>
+			<div ng-controller="fortuneTableCtrl">
+				<table class="flex" name="fortuneTable" id="fortune-table">
+					<tr class="flex">
+						<th class="thID idWidth">ID</th>
+						<th class="thUser userWidth">User</th>
+						<th class="thFortune fortuneWidth">Fortune Text</th>
+						<th class="thDate dateWidth">Date Submitted</th>
+						<th class="thFav favWidth"><img src="images/filledCheck.png" alt=""></th>
+					</tr>
+					<tr ng-repeat="x in allFortunes" class="flex">
+						<td class="idWidth">{{x.ID}}</td>
+						<td class="userWidth">{{x.user}}</td>
+						<td class="fortuneWidth">{{x.fortuneText}}</td>
+						<td class="dateWidth">{{x.dateSubmitted}}</td>
+						<td class="favWidth">{{x.favoriteAmount}}</td>
+					</tr>	
+				</table>
+			</div>
 			<ol id="ol-list-append" class="ol-list-append flex" data-id="${id}">
-			
 			</ol>
 		</section>
 		</main>
