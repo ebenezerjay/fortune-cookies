@@ -9,47 +9,85 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<!-- <link rel="icon" href="data:,"> -->
 	<title>Fortune Cookie Database</title>
 </head>
 <body>
 	<aside class="left-aside flex">
 		
 	</aside>
-	<main class="flex">
-		<section ng-app="fortuneApp" class="flex">
-			<h1 class="fortune-heading">Fortune Cookie Database</h1>
-			<form name="fortune-form" action="fortunes.php" method="POST" class="flex" autocomplete="on" target="_top">
-				<input type="text" name="user" id="user-name-id" class="user-name" placeholder="type your name here" required>
-				<input ng-model="imgTextModel" type="text" name="fortuneText" id="fortune-input" class="fortune-input" placeholder="Type your fortune here" required>
-				<button class="enter-button" id="enter-button" type="submit" name="enter" >Enter</button>
-			</form>
-			<article class="middle-section flex" data-id="${id}">
-				<img src="images/emptyFortune-image.jpg" alt="image of fortune from inside a fortune cookie" class="fortune-image flex" id="fortune-image-id">
-				<h2 ng-bind="imgTextModel" class="img-text flex" id="img-text-id"></h2>
-			</article>
-			<div ng-controller="fortuneTableCtrl">
-				<table class="flex" name="fortuneTable" id="fortune-table">
-					<tr class="flex">
-						<th class="thID idWidth">ID</th>
-						<th class="thUser userWidth">User</th>
-						<th class="thFortune fortuneWidth">Fortune Text</th>
-						<th class="thDate dateWidth">Date Submitted</th>
-						<th class="thFav favWidth"><img src="images/filledCheck.png" alt=""></th>
-					</tr>
-					<tr ng-repeat="x in allFortunes" class="flex">
-						<td class="idWidth">{{x.ID}}</td>
-						<td class="userWidth">{{x.user}}</td>
-						<td class="fortuneWidth">{{x.fortuneText}}</td>
-						<td class="dateWidth">{{x.dateSubmitted}}</td>
-						<td class="favWidth">{{x.favoriteAmount}}</td>
-					</tr>	
-				</table>
-			</div>
-			<ol id="ol-list-append" class="ol-list-append flex" data-id="${id}">
-			</ol>
+	<main ng-app="fortuneApp" class="flex">
+		<section class="flex top-section" id="top-section">
+				<h1 class="fortune-heading">Fortune Cookie Database</h1>
+				<nav class="flex">
+					<ul class="flex">
+						<li class="flex li-about-button nav-li" id="li-about-id">About</li>
+						<li class="flex li-contact-button nav-li" id="li-contact-id">Contact</li>
+						<li class="flex nav-search-dropdown nav-li" id="li-search-id">
+							<label for="searchOptions">Search Database</label>
+							<select name="searchOptions" id="search-options-id">
+								<option value="">
+								<option value="ID">Search by ID
+								<option value="user">Search by User name
+								<option value="fortune">Search by Fortune
+								<option value="date">Search by Date Submitted
+								<option value="fav">Search by Amount of Times liked	
+							</select>
+						</li>
+					</ul>
+				</nav>
+				<p class="about-paragraph" id="about-paragraph-id">
+					I created this database to store all the fortune cookie messages that i've been saving over the years. I like using them 
+					for lyrical inspiration once and awhile. I also thought it'd be cool to see how many times a fortune is duplicated. 
+					Check out some<span class="features-span-btn"> Upcoming Features</span>
+				</p>
+				<ul class="about-future-features-ul" id="about-future-features-ul-id">
+					<li>Ways to sort database</li>
+					<li>Ability for users to 'like' specific fortunes</li>
+					<li>Ability for users to recieve daily fortunes via email</li>
+				</ul>
+				<article class="contact-form-container" id="contact-form-container-id">
+					<h3 class="flex contact-heading">Submit Feedback/Questions/Comments Here</h3>
+					<div ng-controller="contact-form-ctrl" class="contact-form-ctrl-container">
+						<form action="fortunes.php" method="POST" class="flex contact-form">
+							<input type="text" name="contactName" class="contact-form-name" placeholder="type your name here" required>
+							<input type="email" name="contactEmail" class="contact-form-email" placeholder="type your email here" required>
+							<input type="text" name="contactTopic" class="contact-form-topic" placeholder="what is this message about?" required>
+							<button type="submit" name="contact-enter" class="contact-form-btn" id="contact-form-btn-id">Submit message</button>
+							<textarea name="contactMessage" class="contact-form-message" cols="30" rows="10" placeholder="type your message here" required></textarea>
+						</form>
+					</div>
+				</article>
+			</section>
+		<form name="fortune-form" action="fortunes.php" method="POST" class="flex" autocomplete="on" target="_top">
+			<input type="text" name="user" id="user-name-id" class="user-name" placeholder="type your name here" required>
+			<input ng-model="imgTextModel" type="text" name="fortuneText" id="fortune-input" class="fortune-input" placeholder="Type your fortune here" required>
+			<button class="enter-button" id="enter-button" type="submit" name="enter" >Submit Fortune</button>
+		</form>
+		<section class="middle-section flex" data-id="${id}">
+			<img src="images/emptyFortune-image.jpg" alt="image of fortune from inside a fortune cookie" class="fortune-image flex" id="fortune-image-id">
+			<h2 ng-bind="imgTextModel" class="img-text flex" id="img-text-id"></h2>
 		</section>
-		</main>
+		<div ng-controller="fortuneTableCtrl" class="table-div">
+			<table class="flex" name="fortuneTable" id="fortune-table">
+				<tr class="flex">
+					<th ng-click="orderByMe('ID')" class="thID idWidth">ID</th>
+					<th ng-click="orderByMe('user')" class="thUser userWidth">User</th>
+					<th ng-click="orderByMe('fortuneText')" class="thFortune fortuneWidth">Fortune Text</th>
+					<th class="thDate dateWidth">Date Submitted</th>
+					<!-- <th class="thFav favWidth"><img src="images/filledCheck.png" alt=""></th> -->
+				</tr>
+				<tr ng-repeat="x in allFortunes | orderBy:myOrderBy" class="flex">
+					<td class="idWidth">{{x.ID}}</td>
+					<td class="userWidth">{{x.user}}</td>
+					<td class="fortuneWidth">{{x.fortuneText}}</td>
+					<td class="dateWidth">{{x.dateSubmitted}}</td>
+					<!-- <td class="favWidth">{{x.favoriteAmount}}</td> -->
+				</tr>	
+			</table>
+		</div>
+			<!-- <ol id="ol-list-append" class="ol-list-append flex" data-id="${id}">
+			</ol> -->
+	</main>
 	<aside class="right-aside flex">
 
 	</aside>
@@ -57,8 +95,6 @@
 		<p class="footer-text flex">copyright 2020, Created by Ebenezer Jay Ingalsbe</p>
 	</footer>
 </body>
-<!-- <script src="angular-copy/angular.min.js"></script> -->
-<!-- <script src="fortuneApp.js"></script> -->
 <script src="jquery-copy.js"></script>
 <script src="main.js"></script>
 <script src="fortune.js"></script>

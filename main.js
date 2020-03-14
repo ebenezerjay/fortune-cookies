@@ -3,6 +3,8 @@ const fortuneInput = document.querySelector('#fortune-input');
 const userName = document.querySelector('#user-name-id');
 // const searchInput = document.querySelector('#search-input-id');
 const enterButton = document.querySelector('#enter-button');
+const aboutButton = $('#li-about-id');
+const contactButton = $('#li-contact-id');
 // const appendSection = document.querySelector('#ol-list-append');
 const fortuneLabel = document.querySelector('#img-text-id');
 // const fortuneTable = $("#fortune-table");
@@ -11,13 +13,16 @@ const fortuneLabel = document.querySelector('#img-text-id');
 // var fortuneArray = JSON.parse(localStorage.getItem('fortune-array')) || [];
 
 // event listeners
+aboutButton.on('click', showAbout);
+contactButton.on('click', showContact);
 // enterButton.addEventListener('click', function() {
 // 	createFortuneObject();
 // });
 // appendSection.addEventListener('click', deleteFortune);
 // appendSection.addEventListener('click', changeCheckMark);
 // appendSection.addEventListener('input', editFortune);
-window.addEventListener('load',onPageLoad);
+// window.addEventListener('load',onPageLoad);
+
 // searchInput.addEventListener('keyup', function(e) {
 // 	if (13 == e.keyCode || searchInput.value) {
 // 		appendSection.innerHTML = '';
@@ -49,7 +54,7 @@ function onPageLoad() {
 // Angular code for sending ajax call on page load
 const app = angular.module('fortuneApp', []);
 
-app.controller('fortuneTableCtrl', ['$scope', '$http', function ($scope, $http) {
+app.controller('fortuneTableCtrl', ['$scope', '$http', function($scope, $http) {
  $http({
   method: 'post',
   url: 'fortunes.php'
@@ -57,9 +62,63 @@ app.controller('fortuneTableCtrl', ['$scope', '$http', function ($scope, $http) 
   // Store response data
   $scope.allFortunes = response.data;
  });
+ $scope.orderByMe = function(x) {
+	$scope.myOrderBy = x;
+}
 }]);
 
+// Angular code for sending contact info via ajax call
+app.controller('contact-form-ctrl', ['$scope', '$http', function($scope, $http) {
+	$http({
+	 method: 'post',
+	 url: 'fortunes.php'
+	}).then(function successCallback(response) {
+	 // Store response data
+	 $scope.allFortunes = response.data;
+	});
+	
+ }]);
 
+// inserts text over the fortune image
+function appendOntoImg() {
+	fortuneLabel.innerText = fortuneInput.value;
+}
+
+// shows page info when clicked
+function showAbout() {
+	let aboutParagraph = $('#about-paragraph-id');
+	let featuresBtn = $('.features-span-btn');
+	$(aboutParagraph).toggleClass('about-paragraph');
+	featuresBtn.on('click', showFeaturesBtn);
+}
+
+// shows the upcoming page updates 
+function showFeaturesBtn() {
+	let aboutFutureFeatures = $('#about-future-features-ul-id');
+	$(aboutFutureFeatures).toggleClass('about-future-features-ul');
+}
+
+// shows the contact form
+function showContact() {
+	let contactForm = $('#contact-form-container-id');
+	$(contactForm).toggleClass('contact-form-container');
+	$(contactForm).css('border', '1px solid black');
+	$(contactForm).css('marginBottom', '15px');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// old code used for reference
 
 // creates the Fortune object that is saved into local storage
 // function createFortuneObject() {
@@ -108,11 +167,6 @@ app.controller('fortuneTableCtrl', ['$scope', '$http', function ($scope, $http) 
 // 		checkmark.setAttribute('src', 'images/unFilledCheck.png');
 // 	}
 // }
-
-// inserts text over the fortune image
-function appendOntoImg() {
-	fortuneLabel.innerText = fortuneInput.value;
-}
 
 // deletes fortune from dom and local storage
 // function deleteFortune(e) {
