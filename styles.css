@@ -1,3 +1,4 @@
+/* element selectors by page order */
 body {
 	background-color: #413D49;
 	display: grid;
@@ -15,23 +16,14 @@ main {
 	align-items: center;
 	background-color: #F3F0F9;
 	grid-area: main;
+	flex-wrap: wrap;
+	width: 100%;
 }
 
 h1 {
 	font-family: 'Quicksand', sans-serif;
-	margin: 0px;
+	margin: auto;
 	height: 38px;
-}
-
-h3 {
-	color: #E76200;
-	margin: 5px;
-	/* width: 51%; */
-}
-
-h3:hover {
-	color: red;
-	cursor: pointer;
 }
 
 ol {
@@ -41,13 +33,88 @@ ol {
 	width: 100%;
 }
 
+nav {
+	margin-right: 5%;
+	justify-content: center;
+	width: 94%;
+}
+
+ul {
+	justify-content: center;
+	width: 100%;
+}
+
+li {
+	height: 25px;
+	text-align: center;
+	list-style: none;
+}
+
+p {
+	margin: 5%;
+}
+
+form {
+	align-items: center;
+	justify-content: center;
+	height: 10%;
+	width: 100%;
+}
+
+input,
+button {
+	height: 30px;
+}
+
+label {
+	align-self: center;
+	padding-right: 10px;
+}
+
 section {
 	flex-wrap: wrap;
 	justify-content: center;
 	width: 100%;
 }
 
+footer {
+	grid-area: footer;
+	justify-content: center;
+}
+
+/* site navigation */
+.nav-controller-div {
+	width: 100%;
+}
+
+.nav-search-dropdown {
+	width: 42%;
+}
+
+.nav-li {
+	align-items: center;
+	background-color: #bebebe;
+	border: 1px solid rgba(1, 103, 129, 0.493);
+	justify-content: center;
+}
+
+.nav-li:hover {
+	background-color: #1a47c3;
+	cursor: pointer;
+}
+
+.about-paragraph,
+.about-heading,
+.about-future-features-ul,
+.contact-form-container {
+	display: none;
+}
+
  /* tabel styling */
+.table-div {
+	width: 100%;
+}
+
 table {
 	border: 2px solid black;
 	width: 100%;
@@ -55,55 +122,70 @@ table {
 	font-family: monospace;
 	font-size: 22px;
 	justify-content: center;
+	padding: 5px;
 	}
+
+tbody {
+	width: 100%;
+}
 
 th {
 	background-color: #858585;
 	border: 1px solid black;
 	color: white;
+	padding: 6px;
 	}
 
-.thID {
-}
+/* .thID {
+} */
 
 .idWidth {
 	width: 6%;	
 }
 
-.thUser {
-}
+/* .thUser {
+} */
 
 .userWidth {
 	width: 12%;
 }
-.thFortune {
-}
+/* .thFortune {
+} */
 
 .fortuneWidth {
 	width: 65%;
 }
 
-.thDate {
-}
+/* .thDate {
+} */
 
 .dateWidth {
 width: 17%;
 }
 
-.thFav {
-}
+/* .thFav {
+} */
 
-.favWidth {
+/* .favWidth {
 
-}
+} */
 
 td {
 	border: 2px solid black;
 	color: #413D49;
+	padding: 5px;
+	text-align: center;
 }
+
+/* tr:hover {
+	background-color: #1a47c3;
+} */
+
 tr:nth-child(even) {
 	background-color: #f2f2f2
 }
+
+/* general class selectors */
 
 .left-aside {
 	grid-area: left-sidebar;
@@ -113,26 +195,11 @@ tr:nth-child(even) {
 	grid-area: right-sidebar;
 }
 
-footer {
-	grid-area: footer;
-	justify-content: center;
-}
-
 .flex {
 	display: flex;
 }
 
-form {
-	flex-wrap: wrap;
-	justify-content: center;
-	height: 10%;
-	width: 100%;
-}
-
-/* .email-form {
-	
-} */
-
+/* button selectors */
 .enter-button {
 	padding: 5px;
 	width: 15%;
@@ -148,14 +215,48 @@ form {
 	cursor: pointer;
 }
 
-input {
-	height: 25px;
+.li-about-button,
+.li-contact-button {
+	width: 20%;
+}
+
+.features-span-btn {
+	font-size: 20px;
+}
+
+.features-span-btn:hover {
+	background-color: #1a47c3;
+	cursor: pointer;
+}
+
+/* form selectors */
+
+.contact-heading {
+	margin: auto;
+	width: 50%;
+}
+
+.contact-form {
+	flex-wrap: wrap;
+}
+
+.contact-form-name {
+	margin-right: 5px;
+	width: 30%;
+}
+
+.contact-form-email {
+	margin-left: 5px;
 	width: 40%;
 }
 
-label {
-	align-self: center;
-	padding-right: 10px;
+.contact-form-topic {
+	width: 50%;
+}
+
+.contact-form-message {
+	margin: 5px 0px;
+	width: 60%;
 }
 
 .top-form {
@@ -164,12 +265,10 @@ label {
 }
 
 .fortune-input {
-	/* padding: 5px; */
 	width: 50%;
 }
 
 .user-name {
-	/* padding: 5px; */
 	width: 15%;
 }
 
@@ -178,11 +277,7 @@ label {
 	width: 100%;
 }
 
-/* img {
-	margin: 10px 0px;
-	width: 50%;
-} */
-
+/* image selectors */
 .checkmark-image {
 	margin: 0px;
 	width: fit-content;
@@ -193,14 +288,8 @@ label {
 	cursor: pointer;
 }
 
-.list-buttons {
-	margin: 5px;
-	justify-content: space-between;
-}
-
 .middle-section {
 	flex-wrap: wrap;
-	/* justify-content: center; */
 	width: 100%;
 }
 
@@ -211,25 +300,19 @@ label {
 }
 
 .img-text {
+	align-self: center;
 	color: #1a47c3;
 	font-size: 20px;
-	position: relative;
-	bottom: 44%;
 	margin: auto;
-	/* width: 50%; */
+	position: absolute;
+	right: 45%;
 }
+
+/* selectors for lists */
 
 .ol-list-append {
 	justify-content: center;
 	padding-left: 0px;
-}
-
-.article-appended-fortune {
-	background-color: #FCF9F6;
-	border: 1px solid black;
-	justify-content: center;
-	margin: 5px 14%;
-	width: fit-content;
 }
 
 .search-input {
