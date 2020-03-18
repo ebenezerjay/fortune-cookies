@@ -17,52 +17,58 @@
 	</aside>
 	<main ng-app="fortuneApp" class="flex">
 		<section class="flex top-section" id="top-section">
-				<h1 class="fortune-heading">Fortune Cookie Database</h1>
-				<nav class="flex">
-					<ul class="flex">
-						<li class="flex li-about-button nav-li" id="li-about-id">About</li>
-						<li class="flex li-contact-button nav-li" id="li-contact-id">Contact</li>
-						<li class="flex nav-search-dropdown nav-li" id="li-search-id">
-							<label for="searchOptions">Search Database</label>
-							<select name="searchOptions" id="search-options-id">
-								<option value="">
-								<option value="ID">Search by ID
-								<option value="user">Search by User name
-								<option value="fortune">Search by Fortune
-								<option value="date">Search by Date Submitted
-								<option value="fav">Search by Amount of Times liked	
-							</select>
-						</li>
-					</ul>
-				</nav>
-				<p class="about-paragraph" id="about-paragraph-id">
-					I created this database to store all the fortune cookie messages that i've been saving over the years. I like using them 
-					for lyrical inspiration once and awhile. I also thought it'd be cool to see how many times a fortune is duplicated. 
-					Check out some<span class="features-span-btn"> Upcoming Features</span>
-				</p>
-				<ul class="about-future-features-ul" id="about-future-features-ul-id">
-					<li>Ways to sort database</li>
-					<li>Ability for users to 'like' specific fortunes</li>
-					<li>Ability for users to recieve daily fortunes via email</li>
+			<h1 class="fortune-heading">Fortune Cookie Database</h1>
+			<nav class="flex">
+				<ul class="flex">
+					<li class="flex li-about-button nav-li" id="li-about-id">About</li>
+					<li class="flex li-contact-button nav-li" id="li-contact-id">Contact</li>
+					<li class="flex nav-search-dropdown nav-li" id="li-search-id">
+						<label for="searchOptions">Search Database</label>
+						<select name="searchOptions" id="search-options-id">
+							<option value="">
+							<option value="ID">Search by ID
+							<option value="user">Search by User name
+							<option value="fortune">Search by Fortune
+							<option value="date">Search by Date Submitted
+							<option value="fav">Search by Amount of Times liked	
+						</select>
+					</li>
 				</ul>
-				<article class="contact-form-container" id="contact-form-container-id">
-					<h3 class="flex contact-heading">Submit Feedback/Questions/Comments Here</h3>
-					<div ng-controller="contact-form-ctrl" class="contact-form-ctrl-container">
-						<form action="fortunes.php" method="POST" class="flex contact-form">
-							<input type="text" name="contactName" class="contact-form-name" placeholder="type your name here" required>
-							<input type="email" name="contactEmail" class="contact-form-email" placeholder="type your email here" required>
-							<input type="text" name="contactTopic" class="contact-form-topic" placeholder="what is this message about?" required>
-							<button type="submit" name="contact-enter" class="contact-form-btn" id="contact-form-btn-id">Submit message</button>
-							<textarea name="contactMessage" class="contact-form-message" cols="30" rows="10" placeholder="type your message here" required></textarea>
-						</form>
-					</div>
-				</article>
+			</nav>
+			<!-- hidden -->
+			<p class="about-paragraph" id="about-paragraph-id">
+				I created this database to store all the fortune cookie messages that i've been saving over the years. I like using them 
+				for lyrical inspiration once and awhile. I also thought it'd be cool to see how many times a fortune is duplicated. 
+				Check out some<span class="features-span-btn"> Upcoming Features</span>
+			</p>
+			<!-- hidden -->
+			<ul class="about-future-features-ul" id="about-future-features-ul-id">
+				<li>Ways to sort database</li>
+				<li>Ability for users to 'like' specific fortunes</li>
+				<li>Ability for users to recieve daily fortunes via email</li>
+			</ul>
+			<article class="contact-form-container" id="contact-form-container-id">
+				<h3 class="flex contact-heading">Submit Feedback/Questions/Comments Here</h3>
+				<div ng-controller="contactFormCtrl" class="contact-form-ctrl-container flex">
+					<form method="POST" class="flex contact-form">
+						<input type="text" name="contactName" class="contact-form-name" placeholder="type your name here" required>
+						<input type="email" name="contactEmail" class="contact-form-email" placeholder="type your email here" required>
+						<input type="text" name="contactTopic" class="contact-form-topic" placeholder="what is this message about?" required>
+						<button ng-click="contactBtn()" type="button" name="contact-enter" class="contact-form-btn" id="contact-form-btn-id">Submit message</button>
+						<textarea name="contactMessage" class="contact-form-message" cols="30" rows="10" placeholder="type your message here" required></textarea>
+					</form>
+					<h4 class="feedback-response">{{contactResponseTxt}}</h4>
+				</div>
+			</article>
 			</section>
-		<form name="fortune-form" action="fortunes.php" method="POST" class="flex" autocomplete="on" target="_top">
-			<input type="text" name="user" id="user-name-id" class="user-name" placeholder="type your name here" required>
-			<input ng-model="imgTextModel" type="text" name="fortuneText" id="fortune-input" class="fortune-input" placeholder="Type your fortune here" required>
-			<button class="enter-button" id="enter-button" type="submit" name="enter" >Submit Fortune</button>
-		</form>
+		<div ng-controller="submitFortuneCtrl" class="submit-fortune-container flex">
+			<form name="fortune-form" action="" method="POST" class="flex" autocomplete="on" target="_top">
+				<input type="text" name="user" id="user-name-id" class="user-name" placeholder="type your name here" required>
+				<input ng-model="imgTextModel" type="text" name="fortuneText" id="fortune-input" class="fortune-input" placeholder="Type your fortune here" required>
+				<button class="enter-button" id="enter-button" type="button" name="enter" >Submit Fortune</button>
+			</form>
+			<h4 class="submit-fortune-response">{{fortuneResponseTxt}}</h4>
+		</div>
 		<section class="middle-section flex" data-id="${id}">
 			<img src="images/emptyFortune-image.jpg" alt="image of fortune from inside a fortune cookie" class="fortune-image flex" id="fortune-image-id">
 			<h2 ng-bind="imgTextModel" class="img-text flex" id="img-text-id"></h2>
