@@ -2,19 +2,26 @@
 const fortuneInput = document.querySelector('#fortune-input');
 const userName = document.querySelector('#user-name-id');
 // const searchInput = document.querySelector('#search-input-id');
-const enterButton = document.querySelector('#enter-button');
+const enterButton = $('#enter-button');
 const aboutButton = $('#li-about-id');
-const contactButton = $('#li-contact-id');
+const showContactForm = $('#li-contact-id');
+const contactButton = $('#contact-form-btn-id');
 // const appendSection = document.querySelector('#ol-list-append');
 const fortuneLabel = document.querySelector('#img-text-id');
 // const fortuneTable = $("#fortune-table");
+const app = angular.module('fortuneApp', []);
+const contactApp = angular.module('fortuneApp');
+const submitApp = angular.module('fortuneApp');
+
+// const contactModule = angular.module('fortuneApp', []);
 
 
 // var fortuneArray = JSON.parse(localStorage.getItem('fortune-array')) || [];
 
 // event listeners
 aboutButton.on('click', showAbout);
-contactButton.on('click', showContact);
+showContactForm.on('click', showContact);
+
 // enterButton.addEventListener('click', function() {
 // 	createFortuneObject();
 // });
@@ -52,8 +59,6 @@ function onPageLoad() {
 // }
 
 // Angular code for sending ajax call on page load
-const app = angular.module('fortuneApp', []);
-
 app.controller('fortuneTableCtrl', ['$scope', '$http', function($scope, $http) {
  $http({
   method: 'post',
@@ -62,22 +67,39 @@ app.controller('fortuneTableCtrl', ['$scope', '$http', function($scope, $http) {
   // Store response data
   $scope.allFortunes = response.data;
  });
- $scope.orderByMe = function(x) {
-	$scope.myOrderBy = x;
-}
+//  $scope.orderByMe = function(x) {
+// 	$scope.myOrderBy = x;
+// }
 }]);
 
-// Angular code for sending contact info via ajax call
-app.controller('contact-form-ctrl', ['$scope', '$http', function($scope, $http) {
-	$http({
-	 method: 'post',
-	 url: 'fortunes.php'
-	}).then(function successCallback(response) {
-	 // Store response data
-	 $scope.allFortunes = response.data;
+// Angular code for sending contact info without leaving page
+contactApp.controller('contactFormCtrl', function($scope,$http) {
+	let url = 'contact.php';
+	$http.post(url).then(function(response) {
+		$scope.contactResponseTxt = response.data;
 	});
-	
- }]);
+});
+
+// contactApp.controller('contactFormCtrl', ['$scope','$http', function($scope,$http) {
+// 	$scope.contactApp = function() {
+// 		$http({
+// 			method: 'post',
+// 			url: 'fortunes.php'
+// 		}).then(function successCallback(response) {
+// 			$scope.responseTxt = "Your feedback/comment has been submitted. Thank you!";
+// 			$scope.contactBtn = function() {
+// 				$scope.contactResponseTxt = response.responseTxt;
+// 			}
+// 		});
+// 	}
+// }]);
+
+// Angular code for submitting fortune without leaving page
+	submitApp.controller('submitFortuneCtrl', function($scope, $http) {
+		$http.get('submitFortune.php').then(function() {
+			$scope.fortuneResponseTxt = "Thanks for submitting! Check the table below to see your fortune in the database.";
+		});
+	 });
 
 // inserts text over the fortune image
 function appendOntoImg() {

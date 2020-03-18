@@ -231,6 +231,10 @@ tr:nth-child(even) {
 
 /* form selectors */
 
+.submit-fortune-container {
+	width: 100%;
+}
+
 .contact-heading {
 	margin: auto;
 	width: 50%;
