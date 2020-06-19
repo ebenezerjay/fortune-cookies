@@ -77,6 +77,15 @@ app.controller('fortuneTableCtrl', ['$scope', '$http', function($scope, $http) {
 		$(contactForm).css('border', '1px solid black');
 		$(contactForm).css('marginBottom', '15px');
 	}
+
+	$("#form-contact-id").submit(function(e) {
+		e.preventDefault();
+			// serialize the form data
+			let	formData = $(this).serialize();
+			$.post("contact.php", formData, function() {
+				$(".contact-heading").html("Your message was submitted.");
+			});
+	});
 	
 	
 	
