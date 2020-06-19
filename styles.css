@@ -232,6 +232,7 @@ tr:nth-child(even) {
 /* form selectors */
 
 .submit-fortune-container {
+	flex-wrap: wrap;
 	width: 100%;
 }
 
@@ -308,8 +309,8 @@ tr:nth-child(even) {
 	color: #1a47c3;
 	font-size: 20px;
 	margin: auto;
-	position: absolute;
-	right: 45%;
+	position: relative;
+	bottom: 46%;
 }
 
 /* selectors for lists */

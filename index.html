@@ -3,6 +3,7 @@
 <html>
 <head>
 	<link rel="stylesheet" href="styles.css">
+	<meta charset="UTF-8">
 	<!-- <link rel="stylesheet" type="text/css" href="normalize/normalize.css"> -->
 	<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1.0">
 	<link href="https://fonts.googleapis.com/css?family=Dosis|Raleway" rel="stylesheet">
@@ -49,40 +50,40 @@
 			</ul>
 			<article class="contact-form-container" id="contact-form-container-id">
 				<h3 class="flex contact-heading">Submit Feedback/Questions/Comments Here</h3>
-				<div ng-controller="contactFormCtrl" class="contact-form-ctrl-container flex">
-					<form method="POST" class="flex contact-form">
-						<input type="text" name="contactName" class="contact-form-name" placeholder="type your name here" required>
-						<input type="email" name="contactEmail" class="contact-form-email" placeholder="type your email here" required>
-						<input type="text" name="contactTopic" class="contact-form-topic" placeholder="what is this message about?" required>
-						<button ng-click="contactBtn()" type="button" name="contact-enter" class="contact-form-btn" id="contact-form-btn-id">Submit message</button>
-						<textarea name="contactMessage" class="contact-form-message" cols="30" rows="10" placeholder="type your message here" required></textarea>
+					<form method="POST" action="" class="flex contact-form" id="form-contact-id">
+						<input type="text" class="contact-form-name" placeholder="type your name here" required>
+						<input type="email" class="contact-form-email" placeholder="type your email here" required>
+						<input type="text" class="contact-form-topic" placeholder="what is this message about?" required>
+						<button type="button" name="contact-enter" class="contact-form-btn" id="contact-form-btn-id">Submit message</button>
+						<textarea class="contact-form-message" cols="30" rows="10" placeholder="type your message here" required></textarea>
 					</form>
-					<h4 class="feedback-response">{{contactResponseTxt}}</h4>
-				</div>
+				<h4 class="feedback-response">{{contactResponseTxt}}</h4>
 			</article>
 			</section>
-		<div ng-controller="submitFortuneCtrl" class="submit-fortune-container flex">
-			<form name="fortune-form" action="" method="POST" class="flex" autocomplete="on" target="_top">
+		<div  class="submit-fortune-container flex">
+			<form action="" name="fortune-form" method="POST" id="form-submit-id" class="flex form-submit" autocomplete="on">
 				<input type="text" name="user" id="user-name-id" class="user-name" placeholder="type your name here" required>
 				<input ng-model="imgTextModel" type="text" name="fortuneText" id="fortune-input" class="fortune-input" placeholder="Type your fortune here" required>
-				<button class="enter-button" id="enter-button" type="button" name="enter" >Submit Fortune</button>
+				<button class="enter-button" id="enter-button" type="submit" name="enter" >Submit Fortune</button>
 			</form>
-			<h4 class="submit-fortune-response">{{fortuneResponseTxt}}</h4>
+			<section class="middle-section flex" data-id="${id}">
+				<img src="images/emptyFortune-image.jpg" alt="image of fortune from inside a fortune cookie" class="fortune-image flex" id="fortune-image-id">
+				<h2 ng-bind="imgTextModel" class="img-text flex" id="img-text-id"></h2>
+				<!-- <p id="form-submit-response-id">
+
+				</p> -->
+			</section>
 		</div>
-		<section class="middle-section flex" data-id="${id}">
-			<img src="images/emptyFortune-image.jpg" alt="image of fortune from inside a fortune cookie" class="fortune-image flex" id="fortune-image-id">
-			<h2 ng-bind="imgTextModel" class="img-text flex" id="img-text-id"></h2>
-		</section>
 		<div ng-controller="fortuneTableCtrl" class="table-div">
 			<table class="flex" name="fortuneTable" id="fortune-table">
 				<tr class="flex">
-					<th ng-click="orderByMe('ID')" class="thID idWidth">ID</th>
-					<th ng-click="orderByMe('user')" class="thUser userWidth">User</th>
-					<th ng-click="orderByMe('fortuneText')" class="thFortune fortuneWidth">Fortune Text</th>
+					<th class="thID idWidth">ID</th>
+					<th class="thUser userWidth">User</th>
+					<th class="thFortune fortuneWidth">Fortune Text</th>
 					<th class="thDate dateWidth">Date Submitted</th>
 					<!-- <th class="thFav favWidth"><img src="images/filledCheck.png" alt=""></th> -->
 				</tr>
-				<tr ng-repeat="x in allFortunes | orderBy:myOrderBy" class="flex">
+				<tr ng-repeat="x in allFortunes" class="flex">
 					<td class="idWidth">{{x.ID}}</td>
 					<td class="userWidth">{{x.user}}</td>
 					<td class="fortuneWidth">{{x.fortuneText}}</td>
