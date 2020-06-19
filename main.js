@@ -10,11 +10,7 @@ const contactButton = $('#contact-form-btn-id');
 const fortuneLabel = document.querySelector('#img-text-id');
 // const fortuneTable = $("#fortune-table");
 const app = angular.module('fortuneApp', []);
-const contactApp = angular.module('fortuneApp');
 const submitApp = angular.module('fortuneApp');
-
-// const contactModule = angular.module('fortuneApp', []);
-
 
 // var fortuneArray = JSON.parse(localStorage.getItem('fortune-array')) || [];
 
@@ -22,24 +18,6 @@ const submitApp = angular.module('fortuneApp');
 aboutButton.on('click', showAbout);
 showContactForm.on('click', showContact);
 
-// enterButton.addEventListener('click', function() {
-// 	createFortuneObject();
-// });
-// appendSection.addEventListener('click', deleteFortune);
-// appendSection.addEventListener('click', changeCheckMark);
-// appendSection.addEventListener('input', editFortune);
-// window.addEventListener('load',onPageLoad);
-
-// searchInput.addEventListener('keyup', function(e) {
-// 	if (13 == e.keyCode || searchInput.value) {
-// 		appendSection.innerHTML = '';
-//     searchFortunes(searchInput.value);
-//   } else if (!searchInput.value) {
-//     appendSection.innerHTML = '';
-//     loadPreviousFortunes(fortuneArray);
-// 	}
-// 	e.preventDefault();
-// });
 
 // runs functions on page load 
 function onPageLoad() {
@@ -47,110 +25,93 @@ function onPageLoad() {
 	// hideFortunes();
 }
 
-// persists object data on page load and limits 4 fortunes to the page
-// function loadPreviousFortunes(oldFortunes) {
-// 	fortuneArray = [];
-// 		for (var i = 0; i < oldFortunes.length; i++) {
-// 			var newFortune = new Fortune(oldFortunes[i].id, oldFortunes[i].fortuneText, oldFortunes[i].favorite);
-// 			fortuneArray.push(newFortune);
-// 			appendFortune(fortuneArray[i].id, fortuneArray[i].fortuneText, fortuneArray[i].favorite);
-// 			loadFav(fortuneArray[i].favorite);
-// 		}
-// }
 
 // Angular code for sending ajax call on page load
 app.controller('fortuneTableCtrl', ['$scope', '$http', function($scope, $http) {
- $http({
-  method: 'post',
-  url: 'fortunes.php'
- }).then(function successCallback(response) {
-  // Store response data
-  $scope.allFortunes = response.data;
- });
-//  $scope.orderByMe = function(x) {
-// 	$scope.myOrderBy = x;
-// }
-}]);
-
-// Angular code for sending contact info without leaving page
-contactApp.controller('contactFormCtrl', function($scope,$http) {
-	let url = 'contact.php';
-	$http.post(url).then(function(response) {
-		$scope.contactResponseTxt = response.data;
+	$http({
+		method: 'post',
+		url: 'fortunes.php'
+	}).then(function successCallback(response) {
+		// Store response data
+		$scope.allFortunes = response.data;
 	});
-});
-
-// contactApp.controller('contactFormCtrl', ['$scope','$http', function($scope,$http) {
-// 	$scope.contactApp = function() {
-// 		$http({
-// 			method: 'post',
-// 			url: 'fortunes.php'
-// 		}).then(function successCallback(response) {
-// 			$scope.responseTxt = "Your feedback/comment has been submitted. Thank you!";
-// 			$scope.contactBtn = function() {
-// 				$scope.contactResponseTxt = response.responseTxt;
-// 			}
-// 		});
-// 	}
-// }]);
-
-// Angular code for submitting fortune without leaving page
-	submitApp.controller('submitFortuneCtrl', function($scope, $http) {
-		$http.get('submitFortune.php').then(function() {
-			$scope.fortuneResponseTxt = "Thanks for submitting! Check the table below to see your fortune in the database.";
+	//  $scope.orderByMe = function(x) {
+		// 	$scope.myOrderBy = x;
+		// }
+	}]);
+	
+	// ajax call to submit fortune data
+	$("#form-submit-id").submit(function(e) {
+		e.preventDefault();
+		// serialize the form data
+		let	formData = $(this).serialize();
+		// fetch the data using post
+		$.post( "submitFortune.php", formData,function(data) {
+			$(".form-submit").html("Thank you for submitting your fortune! Refresh the page to see your submission.");
 		});
-	 });
-
-// inserts text over the fortune image
-function appendOntoImg() {
-	fortuneLabel.innerText = fortuneInput.value;
-}
-
-// shows page info when clicked
-function showAbout() {
-	let aboutParagraph = $('#about-paragraph-id');
-	let featuresBtn = $('.features-span-btn');
-	$(aboutParagraph).toggleClass('about-paragraph');
-	featuresBtn.on('click', showFeaturesBtn);
-}
-
-// shows the upcoming page updates 
-function showFeaturesBtn() {
-	let aboutFutureFeatures = $('#about-future-features-ul-id');
-	$(aboutFutureFeatures).toggleClass('about-future-features-ul');
-}
-
-// shows the contact form
-function showContact() {
-	let contactForm = $('#contact-form-container-id');
-	$(contactForm).toggleClass('contact-form-container');
-	$(contactForm).css('border', '1px solid black');
-	$(contactForm).css('marginBottom', '15px');
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-// old code used for reference
-
-// creates the Fortune object that is saved into local storage
-// function createFortuneObject() {
-// 	var fortuneId = Math.floor(Date.now());
-// 	var fortuneString = fortuneInput.value;
-// 	var newFortune = new Fortune(fortuneId,fortuneString);
-// 	// appendFortune(fortuneId,fortuneString);
-// 	fortuneArray.push(newFortune);
-// 	newFortune.saveToStorage(fortuneArray);
-// }
+	});
+	
+	// inserts text over the fortune image
+	function appendOntoImg() {
+		fortuneLabel.innerText = fortuneInput.value;
+	}
+	
+	// shows page info when clicked
+	function showAbout() {
+		let aboutParagraph = $('#about-paragraph-id');
+		let featuresBtn = $('.features-span-btn');
+		$(aboutParagraph).toggleClass('about-paragraph');
+		featuresBtn.on('click', showFeaturesBtn);
+	}
+	
+	// shows the upcoming page updates 
+	function showFeaturesBtn() {
+		let aboutFutureFeatures = $('#about-future-features-ul-id');
+		$(aboutFutureFeatures).toggleClass('about-future-features-ul');
+	}
+	
+	// shows the contact form
+	function showContact() {
+		let contactForm = $('#contact-form-container-id');
+		$(contactForm).toggleClass('contact-form-container');
+		$(contactForm).css('border', '1px solid black');
+		$(contactForm).css('marginBottom', '15px');
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// old code used for reference
+	
+	// creates the Fortune object that is saved into local storage
+	// function createFortuneObject() {
+		// 	var fortuneId = Math.floor(Date.now());
+		// 	var fortuneString = fortuneInput.value;
+		// 	var newFortune = new Fortune(fortuneId,fortuneString);
+		// 	// appendFortune(fortuneId,fortuneString);
+		// 	fortuneArray.push(newFortune);
+		// 	newFortune.saveToStorage(fortuneArray);
+		// }
+		
+		// persists object data on page load and limits 4 fortunes to the page
+		// function loadPreviousFortunes(oldFortunes) {
+		// 	fortuneArray = [];
+		// 		for (var i = 0; i < oldFortunes.length; i++) {
+		// 			var newFortune = new Fortune(oldFortunes[i].id, oldFortunes[i].fortuneText, oldFortunes[i].favorite);
+		// 			fortuneArray.push(newFortune);
+		// 			appendFortune(fortuneArray[i].id, fortuneArray[i].fortuneText, fortuneArray[i].favorite);
+		// 			loadFav(fortuneArray[i].favorite);
+		// 		}
+		// }
 
 // appends the inputed fortune to the dom
 // function appendFortune(id,fortune,favorite) {

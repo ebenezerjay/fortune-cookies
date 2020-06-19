@@ -7,7 +7,7 @@ if ($fortuneTable->connect_error) {
 	die('Connect error: ' . $fortuneTable->connect_errno . ': ' . $fortuneTable->connect_error);
 }
 
-$sel = mysqli_query($fortuneTable,"select * from allFortunes");
+$sel = mysqli_query($fortuneTable,"SELECT * from allFortunes order by ID DESC");
 $data = array();
 
 while ($row = mysqli_fetch_array($sel)) {

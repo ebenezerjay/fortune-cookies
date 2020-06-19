@@ -1,8 +1,6 @@
 <?php
-
-//check if fortune form was submitted
-if(isset($_POST['enter'])){ 
 	$message = "";
+	// connect to database
 	$fortuneDatabase = new mysqli("localhost:3306", "fortuned_eJI", "Helpontheway2112!", "fortuned_Fortunes");
 
 	// Check connection
@@ -28,6 +26,4 @@ if(isset($_POST['enter'])){
 	} else {
 		die("Error: {$fortuneDatabase->errno} : {$fortuneDatabase->error}");
 	}
-} 
-
 ?>
